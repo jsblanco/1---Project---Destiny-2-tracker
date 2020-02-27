@@ -1,7 +1,7 @@
 var apiKey = "dd6e865e28924fad9ea265dfae890e35";
 
 const searchButton = document.getElementById("search-button")
-const searchInput = document.getElementById("steam-name-input").value
+const searchInput = document.getElementById("steam-name-input")
 const resultsList = document.getElementById("steam-results")
 let steamPlayers = []
 
@@ -13,8 +13,11 @@ let destinyMembershipId= "4611686018467782694";*/
 searchButton.onclick=()=>{steamDisplayNameQuery()}
 
 
+
+
 async function initialSearchResults(){
-  let playerList = await steamDisplayNameQuery(searchInput)
+  
+  let playerList = await steamDisplayNameQuery(searchInput.value)
   console.log(playerList)
   for (let i=0; i<playerList.length; i++){
     let newResult = document.createElement("li")
@@ -40,7 +43,10 @@ headers: {"X-API-Key": apiKey}})
 //Lo usaremos para extraer sus personajes y sus iconos mediante su membershipId
 
 
-function steamDisplayNameQuery (user) {  
+function steamDisplayNameQuery () {
+let user = searchInput.value
+resultsList.innerHTML=""
+steamPlayers=[]
 fetch(`https://www.bungie.net/Platform/User/SearchUsers/?q=${user}`, {
 headers: {"X-API-Key": "dd6e865e28924fad9ea265dfae890e35"}})
 .then (response => response.json())
