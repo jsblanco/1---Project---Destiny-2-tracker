@@ -10,16 +10,18 @@ let steamPlayers = []
 let membershipType= 3
 let destinyMembershipId= "4611686018467782694";*/
 
-searchButton.onclick=()=>{steamDisplayNameQuery()}
+searchButton.onclick = () => {
+  steamDisplayNameQuery()
+}
 
 
 
 
-async function initialSearchResults(){
-  
+async function initialSearchResults() {
+
   let playerList = await steamDisplayNameQuery(searchInput.value)
   console.log(playerList)
-  for (let i=0; i<playerList.length; i++){
+  for (let i = 0; i < playerList.length; i++) {
     let newResult = document.createElement("li")
     newResult.innerHTML = playerList[i].steamDisplayName;
     resultsList.appendChild(newResult)
@@ -43,27 +45,44 @@ headers: {"X-API-Key": apiKey}})
 //Lo usaremos para extraer sus personajes y sus iconos mediante su membershipId
 
 
-function steamDisplayNameQuery () {
-let user = searchInput.value
-resultsList.innerHTML=""
-steamPlayers=[]
-fetch(`https://www.bungie.net/Platform/User/SearchUsers/?q=${user}`, {
-headers: {"X-API-Key": "dd6e865e28924fad9ea265dfae890e35"}})
-.then (response => response.json())
-.then (json => json.Response)
-.then (function(players) {steamPlayers.push( players.filter(function (player){ //PROBLEMA: en runJS funciona, pero en firefox dice que players es undeclared
-  if (player.steamDisplayName != false){return player}
-}))})
-.then (function () {for (let i=0; i<steamPlayers[0].length; i++){
-  let newResult = document.createElement("li")
-  newResult.innerHTML = steamPlayers[0][i].steamDisplayName;
-  resultsList.appendChild(newResult)
-}}
-)
+function steamDisplayNameQuery() {
+  let user = searchInput.value
+  resultsList.innerHTML = ""
+  steamPlayers = []
+  fetch(`https://www.bungie.net/Platform/User/SearchUsers/?q=${user}`, {
+      headers: {
+        "X-API-Key": "dd6e865e28924fad9ea265dfae890e35"
+      }
+    })
+    .then(response => response.json())
+    .then(json => json.Response)
+    .then(function (players) {
+      steamPlayers = players.filter(function (player) {
+        return (
+          player.steamDisplayName
+        );
+      });
+    })
+    .then(function () {
+      for (let i = 0; i < steamPlayers.length; i++) {
+        let newResult = document.createElement("li")
+        newResult.innerHTML = `Identificador de Bungie: <b>${steamPlayers[i].uniqueName}</b> Nombre en Steam: <b>${steamPlayers[i].steamDisplayName}</b>`;
+        resultsList.appendChild(newResult)
+      }
+    }
+  )
 }
 
 /*
+function howManyMovies(array) {
+  steamPlayers = players.filter(function(player) {
+    return (
+      player.steamDisplayName === true
+    );
+  });
 
+  return Spielberg.length;
+}
 
 
 
