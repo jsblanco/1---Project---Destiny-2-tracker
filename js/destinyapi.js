@@ -12,31 +12,18 @@ let membershipType= 3
 let destinyMembershipId= "4611686018467782694";*/
 
 searchButton.onclick = () => {
-  console.log("hola holita")
-steamDisplayNameQuery()
- //esqueleto()
+  //console.log("Búsqueda se inicia")
+  steamDisplayNameQuery()
+  //esqueleto()
 }
 
-
-
-
-async function initialSearchResults() {
-
-  let playerList = await steamDisplayNameQuery(searchInput.value)
-  console.log(playerList)
-  for (let i = 0; i < playerList.length; i++) {
-    let newResult = document.createElement("li")
-    newResult.innerHTML = playerList[i].steamDisplayName;
-    resultsList.appendChild(newResult)
-  }
-}
-
-
-//INFO:
-//https://bungie-net.github.io/multi/operation_get_User-SearchUsers.html#operation_get_User-SearchUsers
 
 
 /*
+//INFO:
+//https://bungie-net.github.io/multi/operation_get_User-SearchUsers.html#operation_get_User-SearchUsers
+
+Mi profileId: 4611686018467782694
 
 fetch("https://www.bungie.net/Platform//User/SearchUsers/?q=Cydonia", {
 headers: {"X-API-Key": apiKey}})
@@ -44,24 +31,13 @@ headers: {"X-API-Key": apiKey}})
 .then (json => console.log(json))
 */
 
+
+
 //Aquí consigo un array con todos los usuarios de Steam. 
 //Lo usaremos para extraer sus personajes y sus iconos mediante su membershipId
 
-
-async function esqueleto(){
-  let steamQuery = await steamDisplayNameQuery();
-  let membership = await populateResults() 
-  let populate = await populateResults();
-console.log('steamQuery :', steamQuery);
-console.log('membership :', membership);
-console.log('populate :', populate);
-
-}
-
-
-
- function steamDisplayNameQuery() {
-  console.log("steam empieza")
+function steamDisplayNameQuery() {
+  //console.log("steam empieza")
   let user = searchInput.value
   resultsList.innerHTML = ""
   steamPlayers = []
@@ -79,10 +55,9 @@ console.log('populate :', populate);
         );
       });
     })
-    .then (()=>console.log("steamDisplayNameQuery terminada"))
-   .then (() => membershipByPlatform())
-//  .then(() => populateResults ());
-  }
+    //.then (()=>console.log("steamDisplayNameQuery terminada"))
+    .then(() => membershipByPlatform())
+}
 
 
 
@@ -90,84 +65,78 @@ console.log('populate :', populate);
 //Tenemos que meter steamPlayers.membershipId
 
 
- function membershipByPlatform() {
+function membershipByPlatform() {
   console.log("Empieza Membership ID")
-  steamPlayers.map(function(user){
-  fetch(`https://www.bungie.net/Platform/User/GetMembershipsById/${user.membershipId}/3/`, {
-    headers: {"X-API-Key": "dd6e865e28924fad9ea265dfae890e35"}})
-    .then (response => response.json())
-    .then (json => json.Response.destinyMemberships)
-    .then (json => json.filter((memberships)=> memberships.membershipType === 3 && memberships.displayName === "Cydonia"))
-    .then (json => populateResults(json))
+  steamPlayers.map(function (user) {
+    fetch(`https://www.bungie.net/Platform/User/GetMembershipsById/${user.membershipId}/3/`, {
+        headers: {
+          "X-API-Key": "dd6e865e28924fad9ea265dfae890e35"
+        }
+      })
+      .then(response => response.json())
+      .then(json => json.Response.destinyMemberships)
+      .then(json => json.filter((memberships) => memberships.membershipType === 3 && memberships.displayName === "Cydonia"))
+      .then(json => populateResults(json))
   })
 }
 
 
 
-/* copia de seguridad de membersshipId:
- function membershipByPlatform(membershipId) {
-  let user = membershipId
-  
-  
-  fetch(`https://www.bungie.net/Platform/User/GetMembershipsById/${user}/3/`, {
-    headers: {"X-API-Key": "dd6e865e28924fad9ea265dfae890e35"}})
-    .then (response => response.json())
-    .then (json => json.Response.destinyMemberships)
-    .then (json => json.filter((memberships)=> memberships.membershipType === 3))
-    .then (json => userProfiles.push(json[0]))
-    .then (() => console.log(userProfiles))
-  }
-
-  */
 
 
-
- function populateResults(json) {
+//Nos muestra la pantalla de inicio. Ahora mismo bebe de Membership Id pero la idea es que beba también de los personajes
+function populateResults(json) {
   console.log("Adios")
   for (let i = 0; i < json.length; i++) {
-    let newResult = document.createElement("li")
-    newResult.innerHTML = `Identificador de Bungie: <b>${json[i].membershipId}</b> Nombre en Steam: <b>${json[i].displayName}</b>`;
+    let newResult = document.createElement("ul")
+    newResult.setAttribute("class", `${json[i].membershipId}`)
+    let resultHeader = document.createElement("li")
+    resultHeader.innerHTML = `Identificador de Bungie: <b>${json[i].membershipId}</b> Nombre en Steam: <b>${json[i].displayName}</b>`;
     resultsList.appendChild(newResult);
-    userProfiles.push(json[i])
-  }}
+    newResult.appendChild(resultHeader);
+  }
+}
+
+//Esta función nos consigue el perfil de Destiny de cada jugador en base al membershipId que obtuvimos en membershipByPlatform
+//Nos hace una llamada por cada personaje del usuario a una nueva función, que extrae sus datos
+
+function getPlayerCharacters(membershipId) {
+  console.log(`https://www.bungie.net/Platform/Destiny2/3/Profile/${membershipId}/?components=200`)
+  fetch(`https://www.bungie.net/Platform/Destiny2/3/Profile/${membershipId.membershipId}/?components=200`, {
+      headers: {
+        "X-API-Key": "dd6e865e28924fad9ea265dfae890e35"
+      }
+    })
+    .then(response => response.json())
+    .then((data) => {
+      let roster = data.Response.characters.data;
+      return roster;
+    })
+    .then((roster) => {
+
+      for (let character in roster) {
+        console.log(character)
+      }
+    })
+}
+
 
 /*
-function howManyMovies(array) {
-  userProfiles = players.filter(function(player) {
-    return (
-      player.steamDisplayName === true
-    );
-  });
 
-  return Spielberg.length;
+async function esqueleto(){
+  let steamQuery = await steamDisplayNameQuery();
+  let membership = await populateResults() 
+  let populate = await populateResults();
+  console.log('steamQuery :', steamQuery);
+  console.log('membership :', membership);
+  console.log('populate :', populate);
 }
 
-
-
+*/
+/*
 //steamDisplayNameQuery("Cydonia")
 
-
-function steamDisplayNameQuery (user) {  
-fetch(`https://www.bungie.net/Platform/User/SearchUsers/?q=${user}`, {
-headers: {"X-API-Key": apiKey}})
-.then (response => response.json())
-.then (json => json.Response)
-.then (function(players) { 
-  steamPlayers = (
-    players.filter(function(player){
-      return player.steamDisplayName
-          }
-        )
-      )
-    }
-  )
-}
-
-
-
-
-
 //Aquí tienes el Profile con el MembershipID por plataforma
-https://www.bungie.net/Platform/Destiny2/3/Profile/4611686018467782694/?components=200
+https://www.bungie.net/Platform/Destiny2/3/Profile/${user.membershipId}/?components=200
 
 */
