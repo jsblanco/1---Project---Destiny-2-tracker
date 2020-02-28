@@ -4,6 +4,7 @@ const searchButton = document.getElementById("search-button")
 const searchInput = document.getElementById("steam-name-input")
 const resultsList = document.getElementById("steam-results")
 let steamPlayers = []
+let userProfiles = []
 
 
 /*
@@ -11,7 +12,9 @@ let membershipType= 3
 let destinyMembershipId= "4611686018467782694";*/
 
 searchButton.onclick = () => {
-  steamDisplayNameQuery()
+  console.log("hola holita")
+steamDisplayNameQuery()
+ //esqueleto()
 }
 
 
@@ -45,13 +48,26 @@ headers: {"X-API-Key": apiKey}})
 //Lo usaremos para extraer sus personajes y sus iconos mediante su membershipId
 
 
-function steamDisplayNameQuery() {
+async function esqueleto(){
+  let steamQuery = await steamDisplayNameQuery();
+  let membership = await populateResults() 
+  let populate = await populateResults();
+console.log('steamQuery :', steamQuery);
+console.log('membership :', membership);
+console.log('populate :', populate);
+
+}
+
+
+
+ function steamDisplayNameQuery() {
+  console.log("steam empieza")
   let user = searchInput.value
   resultsList.innerHTML = ""
   steamPlayers = []
   fetch(`https://www.bungie.net/Platform/User/SearchUsers/?q=${user}`, {
       headers: {
-        "X-API-Key": "dd6e865e28924fad9ea265dfae890e35"
+        "X-API-Key": apiKey
       }
     })
     .then(response => response.json())
@@ -63,19 +79,61 @@ function steamDisplayNameQuery() {
         );
       });
     })
-    .then(function () {
-      for (let i = 0; i < steamPlayers.length; i++) {
-        let newResult = document.createElement("li")
-        newResult.innerHTML = `Identificador de Bungie: <b>${steamPlayers[i].uniqueName}</b> Nombre en Steam: <b>${steamPlayers[i].steamDisplayName}</b>`;
-        resultsList.appendChild(newResult)
-      }
-    }
-  )
+    .then (()=>console.log("steamDisplayNameQuery terminada"))
+   .then (() => membershipByPlatform())
+//  .then(() => populateResults ());
+  }
+
+
+
+//Aquí consigues el membershipID específico de Destiny 2
+//Tenemos que meter steamPlayers.membershipId
+
+
+ function membershipByPlatform() {
+  console.log("Empieza Membership ID")
+  steamPlayers.map(function(user){
+  fetch(`https://www.bungie.net/Platform/User/GetMembershipsById/${user.membershipId}/3/`, {
+    headers: {"X-API-Key": "dd6e865e28924fad9ea265dfae890e35"}})
+    .then (response => response.json())
+    .then (json => json.Response.destinyMemberships)
+    .then (json => json.filter((memberships)=> memberships.membershipType === 3 && memberships.displayName === "Cydonia"))
+    .then (json => populateResults(json))
+  })
 }
+
+
+
+/* copia de seguridad de membersshipId:
+ function membershipByPlatform(membershipId) {
+  let user = membershipId
+  
+  
+  fetch(`https://www.bungie.net/Platform/User/GetMembershipsById/${user}/3/`, {
+    headers: {"X-API-Key": "dd6e865e28924fad9ea265dfae890e35"}})
+    .then (response => response.json())
+    .then (json => json.Response.destinyMemberships)
+    .then (json => json.filter((memberships)=> memberships.membershipType === 3))
+    .then (json => userProfiles.push(json[0]))
+    .then (() => console.log(userProfiles))
+  }
+
+  */
+
+
+
+ function populateResults(json) {
+  console.log("Adios")
+  for (let i = 0; i < json.length; i++) {
+    let newResult = document.createElement("li")
+    newResult.innerHTML = `Identificador de Bungie: <b>${json[i].membershipId}</b> Nombre en Steam: <b>${json[i].displayName}</b>`;
+    resultsList.appendChild(newResult);
+    userProfiles.push(json[i])
+  }}
 
 /*
 function howManyMovies(array) {
-  steamPlayers = players.filter(function(player) {
+  userProfiles = players.filter(function(player) {
     return (
       player.steamDisplayName === true
     );
@@ -106,10 +164,6 @@ headers: {"X-API-Key": apiKey}})
 }
 
 
-
-  //Aquí consigues el membershipID específico de Destiny 2
-
-https://www.bungie.net/Platform/User/GetMembershipsById/16619908/3/
 
 
 
