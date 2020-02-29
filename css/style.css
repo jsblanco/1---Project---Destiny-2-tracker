@@ -1,18 +1,45 @@
-*{
+body {
     font-family: Gill Sans / Gill Sans MT, sans-serif;
+    background-image: url(/img/wallpaper.jpg);
+    background-size: 300vh; 
+}
+
+header {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    background-color: rgba(255, 255, 255, 0.8);      
+    align-content: center;
+    border-bottom: 1px solid grey;
+
+}
+
+
+li{
+    list-style-type: none !important;
+}
+
+#steam-results {
+    padding: 10px 0;
+    margin: 0 0 10px
 }
 
 .characterPill{
     background-size: cover !important;
     color: white !important;
-    height: 80px;
-    width: 450px;
+    height: 60px;
+    width: 300px;
+}
+
+.characterPill p:hover{
+    background-color: rgba(255, 255, 255, 0.8);      
+    color: black
 }
 
 .characterPill p{
-    margin-left: 80px;
-    padding: 15px 10px 10px;
+    margin-left: 55px;
+    padding: 10px 10px 10px;
     height:100%;
+    font-size: 0.85em;
     background-color: rgba(0, 0, 0, 0.2);      
 }
 
@@ -21,7 +48,8 @@
     padding: 8px 0;
     text-align: center;
     border-radius: 20px 20px 0 0;
-    width: 450px;
+    width: 300px;
+    font-size: 0.8em;
     color: aliceblue;
     list-style: none;
 }

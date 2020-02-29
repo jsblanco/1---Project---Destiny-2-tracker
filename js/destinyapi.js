@@ -3,17 +3,28 @@ var apiKey = "dd6e865e28924fad9ea265dfae890e35";
 const searchButton = document.getElementById("search-button")
 const searchInput = document.getElementById("steam-name-input")
 const resultsList = document.getElementById("steam-results")
+const queryStatus = document.getElementById("status")
 
 /*
 let membershipType= 3
 let destinyMembershipId= "4611686018467782694";*/
 
 searchButton.onclick = () => {
+  resultsList.innerHTML = ""
+  let user = searchInput.value
+  if (user === "")
+  {pleaseInputAccountName= document.createElement("h3")
+  pleaseInputAccountName.setAttribute("class", "text-danger w-100 font-weight-bold mx-3 text-center")
+  pleaseInputAccountName.innerHTML="Por favor, incluye un nombre de cuenta válido"
+  resultsList.appendChild(pleaseInputAccountName);} else {
   //console.log("Búsqueda se inicia")
-  steamDisplayNameQuery()
+  steamDisplayNameQuery()}
 }
 
 
+function inputValidator(){
+  
+}
 
 /*
 //INFO DE LA API:
@@ -29,7 +40,30 @@ headers: {"X-API-Key": apiKey}})
 .then (json => console.log(json))
 */
 
+//Estas funciones nos añaden un mensaje de Cargando, y luego los eliminan o sustituyen a medida que encuentran usuarios y personajes
 
+function addLoadingMessage(){
+  selectYourAccount= document.createElement("h4")
+  selectYourAccount.setAttribute("id", "loadingResults")
+  selectYourAccount.setAttribute("class", "w-100 font-weight-bold ml-3")
+  selectYourAccount.innerHTML=`Cargando los resultados...`
+  noResults=document.createElement("p")
+  noResults.setAttribute("id", "noResults")
+  noResults.setAttribute("class", "w-100 font-weight-bold text-muted ml-3")
+  noResults.innerHTML=`<i>¿No aparecen resultados? Prueba a reformular tu búsqueda</i>`
+  queryStatus.appendChild(selectYourAccount);
+  queryStatus.appendChild(noResults);
+}
+
+function usersFound(){
+  let noResults = document.querySelector('#noResults');
+  noResults.parentNode.removeChild(noResults);
+}
+
+function charactersFound(){
+  let loadingMessage = document.querySelector('#loadingResults');
+  loadingMessage.innerHTML="Selecciona tu personaje";
+}
 
 //Aquí consigo un array con todos los usuarios de Steam. 
 //Lo usaremos para extraer sus personajes y sus iconos mediante su membershipId
@@ -37,8 +71,9 @@ headers: {"X-API-Key": apiKey}})
 function steamDisplayNameQuery() {
 //log// console.log("Empieza steamDisplayNameQuery")
   let user = searchInput.value
+  queryStatus.innerHTML=""
   resultsList.innerHTML = ""
-  steamPlayers = []
+  addLoadingMessage()
   fetch(`https://www.bungie.net/Platform/User/SearchUsers/?q=${user}`, {
       headers: {
         "X-API-Key": apiKey
@@ -89,6 +124,7 @@ function populateResults(json) {
   for (let i = 0; i < json.length; i++) {
     let newResult = document.createElement("ul")
     newResult.setAttribute("id", `${json[i].membershipId}`)
+    newResult.setAttribute("class", "col-xl-3 col-lg-4 col-md-6 col-xs-8")
     let resultHeader = document.createElement("li")
     resultHeader.setAttribute("class", "userHeader")
     resultHeader.innerHTML = `Nombre en Steam: <b>${json[i].displayName}</b>`
@@ -97,6 +133,8 @@ function populateResults(json) {
     newResult.appendChild(resultHeader);
     getPlayerCharacters(json[i])
   }
+usersFound()
+
 }
 
 //Esta función nos consigue el perfil de Destiny de cada jugador en base al membershipId que obtuvimos en membershipByPlatform, via populateResults
@@ -175,8 +213,9 @@ function populateCharacterInfo(characterId) {
   }
   //log// console.log("Termina nueva población")
   characterLi.style.backgroundImage = characterEmblem;
-  characterP.innerHTML = `<b>${guardianClass}</b> ${race} ${sex} de nivel de luz <b>${characterId.light}</b><br>     
-  <i>Tiempo de juego: ${Math.floor(spentTime/60)} horas y ${spentTime%60} minutos.</i>`;
+  characterP.innerHTML = `<b>${guardianClass}</b> ${race} ${sex}. <b>${characterId.light} luz</b><br>     
+  <i>${Math.floor(spentTime/60)} horas y ${spentTime%60} minutos jugados.</i>`;
+  charactersFound()
   characterLi.appendChild(characterP)
   userUl.appendChild(characterLi)
   userUl.appendChild(spentTimeLi)

@@ -12,14 +12,21 @@
     <title>Destiny Account Checker</title>
 </head>
 <body>
-    <h1>Destiny 2 profile checker</h1>
-    <p>Simple profile checker using Bungie API as a project for a novice web developer</p>
+    <header class="container-fluid text-center">
 
-    <input id = "steam-name-input" type="text" placeholder="Input your Steam display name"/>
-    <button id="search-button"> Search for a Steam display name </button>
-
-<div id="steam-results">    
-</ul>
+        <h1>Destiny 2 profile checker</h1>
+        <p>Simple profile checker using Bungie API as a project for a novice web developer</p>
+        <div class="row justify-content-center">
+            <input id = "steam-name-input" type="text" placeholder="Input your Steam display name" class="col-lg-4 col-sm-8 col-xm-8 mx-3"/>
+            <button id="search-button" class="col-lg-1 col-sm-8 col-xm-8 mx-3"> Search </button>
+        </div>
+            
+    </header>
+    <section class="container-fluid">
+        <div id="status" class="row text-center my-2"></div>
+        <div id="steam-results" class="row justify-content-center my-2">    
+        </div>
+    </section>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
 </script>
