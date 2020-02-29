@@ -45,18 +45,20 @@ headers: {"X-API-Key": apiKey}})
 function addLoadingMessage(){
   selectYourAccount= document.createElement("h4")
   selectYourAccount.setAttribute("id", "loadingResults")
-  selectYourAccount.setAttribute("class", "w-100 font-weight-bold ml-3")
+  selectYourAccount.setAttribute("class", "w-100 font-weight-bold")
   selectYourAccount.innerHTML=`Cargando los resultados...`
   noResults=document.createElement("p")
   noResults.setAttribute("id", "noResults")
-  noResults.setAttribute("class", "w-100 font-weight-bold text-muted ml-3")
+  noResults.setAttribute("class", "w-100 font-weight-bold text-muted")
   noResults.innerHTML=`<i>¿No aparecen resultados? Prueba a reformular tu búsqueda</i>`
   queryStatus.appendChild(selectYourAccount);
   queryStatus.appendChild(noResults);
 }
 
 function usersFound(){
+  let loadingMessage = document.querySelector('#loadingResults');
   let noResults = document.querySelector('#noResults');
+  loadingMessage.innerHTML="Cuentas de Steam registradas en Bungie:";
   noResults.parentNode.removeChild(noResults);
 }
 
@@ -65,6 +67,8 @@ function charactersFound(){
   loadingMessage.innerHTML="Selecciona tu personaje";
 }
 
+
+//COMIENZA LO DIVERTIDO
 //Aquí consigo un array con todos los usuarios de Steam. 
 //Lo usaremos para extraer sus personajes y sus iconos mediante su membershipId
 

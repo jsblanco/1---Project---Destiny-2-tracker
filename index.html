@@ -11,21 +11,22 @@
     <link rel="stylesheet" href="/css/style.css">
     <title>Destiny Account Checker</title>
 </head>
-<body>
+<body>   
     <header class="container-fluid text-center">
-
         <h1>Destiny 2 profile checker</h1>
         <p>Simple profile checker using Bungie API as a project for a novice web developer</p>
-        <div class="row justify-content-center">
-            <input id = "steam-name-input" type="text" placeholder="Input your Steam display name" class="col-lg-4 col-sm-8 col-xm-8 mx-3"/>
-            <button id="search-button" class="col-lg-1 col-sm-8 col-xm-8 mx-3"> Search </button>
+        <div class="row d-flex justify-content-center">
+            <div class="search col-lg-4 col-sm-8 col-xs-8">
+                <img  src="img/magnifying-glass.png">
+                <input id = "steam-name-input" type="text" placeholder="Input your Steam display name" class="input "/>
+            </div>
+            <button id="search-button" class="btn btn-info col-lg-1 col-sm-8 col-xs-8"> Search </button>
         </div>
             
     </header>
     <section class="container-fluid">
         <div id="status" class="row text-center my-2"></div>
-        <div id="steam-results" class="row justify-content-center my-2">    
-        </div>
+        <div id="steam-results" class="row d-flex justify-content-center my-2"></div>
     </section>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
