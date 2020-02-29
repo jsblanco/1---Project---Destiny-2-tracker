@@ -58,7 +58,7 @@ function steamDisplayNameQuery() {
       });
     })
     //.then (()=>console.log("steamDisplayNameQuery terminada"))
-    .then(() => membershipByPlatform())
+    .then(() => membershipByPlatform(user))
 }
 
 //Aquí consigues el membershipID específico de Destiny 2
@@ -66,6 +66,8 @@ function steamDisplayNameQuery() {
 
 function membershipByPlatform() {
   console.log("Empieza Membership ID")
+  let searchQuery = searchInput.value
+  console.log(searchQuery)
   steamPlayers.map(function (user) {
     fetch(`https://www.bungie.net/Platform/User/GetMembershipsById/${user.membershipId}/3/`, {
         headers: {
@@ -75,7 +77,7 @@ function membershipByPlatform() {
       .then(response => response.json())
       .then(json => json.Response.destinyMemberships)
       .then(json => json.filter((memberships) => memberships.membershipType === 3 
-      //&& memberships.displayName === "Cydonia"
+      && memberships.displayName.toLowerCase().includes(searchQuery.toLowerCase())
       ))
       .then((json) => {
         populateResults(json)
@@ -140,6 +142,7 @@ function populateCharacterInfo(characterId) {
   let characterP = document.createElement("p")
   let characterEmblem = `url(https://www.bungie.net/${characterId.emblemBackgroundPath})`
   let characterLi = document.createElement("li")
+  let spentTime = characterId.minutesPlayedTotal
   characterLi.setAttribute("class", `${characterId.characterId} characterPill`)
   let guardianClass = "";
   let race = "";
@@ -169,9 +172,11 @@ function populateCharacterInfo(characterId) {
 
   console.log("Termina nueva población")
   characterLi.style.backgroundImage = characterEmblem;
-  characterP.innerHTML = `<b>${guardianClass}</b> ${race} ${sex} de nivel de luz <b>${characterId.light}</b>`;
+  characterP.innerHTML = `<b>${guardianClass}</b> ${race} ${sex} de nivel de luz <b>${characterId.light}</b><br>     
+  Tiempo de juego: ${Math.floor(spentTime/60)} horas y ${spentTime%60} minutos.`;
   characterLi.appendChild(characterP)
   userUl[0].appendChild(characterLi)
+  userUl[0].appendChild(spentTimeLi)
 }
 
 
