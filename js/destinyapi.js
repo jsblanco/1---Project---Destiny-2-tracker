@@ -75,7 +75,7 @@ function membershipByPlatform() {
       .then(response => response.json())
       .then(json => json.Response.destinyMemberships)
       .then(json => json.filter((memberships) => memberships.membershipType === 3 
-      //&& memberships.displayName === ""
+      //&& memberships.displayName === "Cydonia"
       ))
       .then((json) => {
         populateResults(json)
