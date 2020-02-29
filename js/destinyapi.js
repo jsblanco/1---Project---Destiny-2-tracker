@@ -197,7 +197,7 @@ function populateResults(json) {
   for (let i = 0; i < json.length; i++) {
     let newResult = document.createElement("ul")
     newResult.setAttribute("id", `${json[i].membershipId}`)
-    newResult.setAttribute("class", "col-xl-3 col-lg-4 col-md-6 col-xs-8")
+    newResult.setAttribute("class", "col-xl-3 col-lg-4 col-md-8")
     let resultHeader = document.createElement("li")
     resultHeader.setAttribute("class", "userHeader")
     resultHeader.innerHTML = `<b>${json[i].displayName}</b>`

@@ -38,6 +38,12 @@ li{
     list-style-type: none !important;
 }
 
+footer{
+    position: fixed;
+    bottom: 1%;
+    right: 1%;
+    padding: 10px;
+}
 .navbar{
     background-color: rgba(50,50,50,.9);
 }
@@ -75,9 +81,6 @@ li{
     width: 40px;
     height: 45px;
 }
-
-
-
 
 .characterPill{
     background-size: cover !important;
