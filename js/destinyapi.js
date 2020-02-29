@@ -4,7 +4,7 @@ const searchButton = document.getElementById("search-button")
 const searchInput = document.getElementById("steam-name-input")
 const resultsList = document.getElementById("steam-results")
 let steamPlayers = []
-let userProfiles = []
+
 
 
 /*
@@ -22,6 +22,8 @@ searchButton.onclick = () => {
 /*
 //INFO:
 //https://bungie-net.github.io/multi/operation_get_User-SearchUsers.html#operation_get_User-SearchUsers
+//COMPONENTS:
+//https://bungie-net.github.io/multi/schema_Destiny-DestinyComponentType.html
 
 Mi profileId: 4611686018467782694
 
@@ -59,11 +61,8 @@ function steamDisplayNameQuery() {
     .then(() => membershipByPlatform())
 }
 
-
-
 //Aquí consigues el membershipID específico de Destiny 2
 //Tenemos que meter steamPlayers.membershipId
-
 
 function membershipByPlatform() {
   console.log("Empieza Membership ID")
@@ -76,17 +75,15 @@ function membershipByPlatform() {
       .then(response => response.json())
       .then(json => json.Response.destinyMemberships)
       .then(json => json.filter((memberships) => memberships.membershipType === 3 && memberships.displayName === "Cydonia"))
-      .then(json => populateResults(json))
+      .then((json) => {
+        populateResults(json)
+      })
   })
 }
 
-
-
-
-
 //Nos muestra la pantalla de inicio. Ahora mismo bebe de Membership Id pero la idea es que beba también de los personajes
 function populateResults(json) {
-  console.log("Adios")
+  console.log("Añadiendo usuarios")
   for (let i = 0; i < json.length; i++) {
     let newResult = document.createElement("ul")
     newResult.setAttribute("class", `${json[i].membershipId}`)
@@ -94,14 +91,14 @@ function populateResults(json) {
     resultHeader.innerHTML = `Identificador de Bungie: <b>${json[i].membershipId}</b> Nombre en Steam: <b>${json[i].displayName}</b>`;
     resultsList.appendChild(newResult);
     newResult.appendChild(resultHeader);
+    getPlayerCharacters(json[i])
   }
 }
 
-//Esta función nos consigue el perfil de Destiny de cada jugador en base al membershipId que obtuvimos en membershipByPlatform
+//Esta función nos consigue el perfil de Destiny de cada jugador en base al membershipId que obtuvimos en membershipByPlatform, via populateResults
 //Nos hace una llamada por cada personaje del usuario a una nueva función, que extrae sus datos
 
 function getPlayerCharacters(membershipId) {
-  console.log(`https://www.bungie.net/Platform/Destiny2/3/Profile/${membershipId}/?components=200`)
   fetch(`https://www.bungie.net/Platform/Destiny2/3/Profile/${membershipId.membershipId}/?components=200`, {
       headers: {
         "X-API-Key": "dd6e865e28924fad9ea265dfae890e35"
@@ -114,11 +111,64 @@ function getPlayerCharacters(membershipId) {
     })
     .then((roster) => {
 
-      for (let character in roster) {
-        console.log(character)
+      for (let characterId in roster) {
+        getCharacterInfo(membershipId.membershipId, characterId)
       }
     })
 }
+
+//Esta función recibe el ID de cada personaje de la función anterior, y extrae todos los datos
+
+function getCharacterInfo(membershipId, characterId) {
+  fetch(`https://www.bungie.net/Platform/Destiny2/3/Profile/${membershipId}/Character/${characterId}/?components=200`, {
+      headers: {
+        "X-API-Key": "dd6e865e28924fad9ea265dfae890e35"
+      }
+    })
+    .then(response => response.json())
+    .then(data => populateCharacterInfo(data.Response.character.data))
+}
+
+//Recibe un array con la información de cada personaje de la función getCharacterInfo y la estructura y publica en el HTML
+//Coloca cada personaje bajo su cuenta de usuario usando el nº de usuario, que en populateResults añadimos como clase para cada Ul
+
+function populateCharacterInfo(characterId) {
+  console.log(`Añadiendo personajes para ${characterId.membershipId}`)
+  let userUl = document.getElementsByClassName(characterId.membershipId)
+  let characterLi = document.createElement("li")
+  let guardianClass = "";
+  let race = "";
+  let sex = (characterId.genderType === 0? "varón" : "mujer")
+  switch (characterId.classType) {
+    case 0:
+      guardianClass = "Titán";
+      break;
+    case 1:
+      guardianClass = "Cazador";
+      break;
+    case 2:
+      guardianClass = "Hechicero";
+      break;
+  }
+  switch (characterId.raceType) {
+    case 0:
+      race = "humano";
+      break;
+    case 1:
+      race = "insomne";
+      break;
+    case 2:
+      race = "exo";
+      break;
+  }
+
+
+  console.log("Termina nueva población")
+  characterLi.innerHTML = `<b>${guardianClass}</b> ${race} ${sex} de nivel de luz <b>${characterId.light}</b>`;
+  userUl[0].appendChild(characterLi)
+}
+
+
 
 
 /*
