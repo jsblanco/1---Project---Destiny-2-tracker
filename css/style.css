@@ -11,7 +11,17 @@
 
 .characterPill p{
     margin-left: 80px;
-    padding: 10px;
+    padding: 15px 10px 10px;
     height:100%;
-    background-color: rgba(0, 0, 0, 0.2);  
+    background-color: rgba(0, 0, 0, 0.2);      
+}
+
+.userHeader {
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 8px 0;
+    text-align: center;
+    border-radius: 20px 20px 0 0;
+    width: 450px;
+    color: aliceblue;
+    list-style: none;
 }
