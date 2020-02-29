@@ -9,10 +9,7 @@ body {
 header {
     padding-top: 50px;
     padding-bottom: 20px;
-  /*  background-color: rgba(255, 255, 255, 0.8);      
-    align-content: center;
-    border-bottom: 1px solid grey;
-*/
+
 }
 
 input{
@@ -59,22 +56,47 @@ li{
 }
 
 
-@media only screen and (min-width: 990px) {
+@media only screen and (min-width: 1451px) {
     #content {
-       padding-top: 100px;
+       padding-top: 46px;
+    }
+ }
+
+ @media only screen and (max-width: 1451px) {
+    #content {
+       padding-top: 86px;
+
     }
  }
 
 
-@media only screen and (max-width: 990px) {
+ @media only screen and (max-width: 991px) {
     #content {
-       padding-top: 250px;
+       padding-top: 143px;
+
+    }
+ }
+
+ @media only screen and (max-width: 477px) {
+    #content {
+       padding-top: 198px;
 
     }
  }
 
 
- 
+@media only screen and (max-width: 385px) {
+    #content {
+       padding-top: 246px;
+
+    }
+ }
+
+
+ #status{
+    background-color: rgba(50,50,50,.9);
+
+ }
 #status:hover{
      font-size: 1.5em;
 }
