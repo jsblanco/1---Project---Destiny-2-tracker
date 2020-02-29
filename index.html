@@ -14,18 +14,22 @@
 <body>   
     <header class="container-fluid">
         <nav class="navbar navbar-expand-lg navbar-light fixed-top d-flex justify-content-between pt-2  pb-1">
-            <div class="col-lg-3 col-md-12">
+            <div class="col-lg-4 col-md-12">
                 <div class="row py-4">
                     <button type="button" class="navbar-toggler bg-light mb-4 mr-5" data-toggle="collapse"
-                    data-target="#nav"><span class="fas fa-bars"></span></button>   
-                    <h1 class="font-weight-bold pl-2 mr-4 text-center">Destiny 2 tracker</h1>
+                    data-target="#nav"><span class="fas fa-bars"></span></button>
+                    <img src="/img/destiny-icon.png" class="navbar-brand destiny-logo"></img>   
+                    <h1 class="font-weight-bold pl-2 ext-center">Destiny 2 tracker</h1>
                 </div>
             </div>
-            <div class="search col-lg-5 col-sm-8 ">
+            <div class="search col-lg-3 col-sm-12 ">
                 <i class="fas fa-search text-light"></i>
-                <input id="steam-name-input" type="text" placeholder="Type your Steam display name">
+                <input id="username-input" type="text" placeholder="Type your account name and select a platform">
             </div>
-            <button id="search-button" class="btn btn-info col-lg-1 col-sm-8"> Search </button>
+                <button id="platform-steam" class="btn btn-dark col-lg-1 col-sm-4"><i class="fab fa-steam mr-2"></i> Steam </button>
+                <button id="platform-playstation" class="btn btn-info col-lg-1 col-sm-4"><i class="fab fa-playstation mr-2"></i> PlayStation </button>
+                <button id="platform-xbox" class="btn btn-success col-lg-1 col-sm-4"><i class="fab fa-xbox mr-2"></i> XBox </button>
+  
             <div class="col-lg-5">
                 <div class="collapse navbar-collapse pl-5" id="nav">
                     <ul class="navbar-nav">
@@ -42,7 +46,7 @@
 
     <section id= "content" class="container-fluid">
         <div id="status" class="row text-center py-2"></div>
-        <div id="steam-results" class="row d-flex justify-content-center my-2"></div>
+        <div id="steam-results" class="row d-flex justify-content-between my-2"></div>
     </section>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
@@ -54,5 +58,8 @@ integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0
 integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
 </script>
 <script src="/js/destinyapi.js"></script>
+<footer>
+    Creado por Jorge Sánchez Blanco
+</footer>
 </body>
 </html>
