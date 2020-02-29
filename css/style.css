@@ -1,0 +1,13 @@
+.characterPill{
+    background-size: cover !important;
+    color: white !important;
+    height: 80px;
+    width: 400px;
+}
+
+.characterPill p{
+    margin-left: 80px;
+    padding: 10px;
+    height:100%;
+    background-color: rgba(0, 0, 0, 0.2);  
+}

@@ -135,7 +135,10 @@ function getCharacterInfo(membershipId, characterId) {
 function populateCharacterInfo(characterId) {
   console.log(`Añadiendo personajes para ${characterId.membershipId}`)
   let userUl = document.getElementsByClassName(characterId.membershipId)
+  let characterP = document.createElement("p")
+  let characterEmblem = `url(https://www.bungie.net/${characterId.emblemBackgroundPath})`
   let characterLi = document.createElement("li")
+  characterLi.setAttribute("class", `${characterId.characterId} characterPill`)
   let guardianClass = "";
   let race = "";
   let sex = (characterId.genderType === 0? "varón" : "mujer")
@@ -162,9 +165,10 @@ function populateCharacterInfo(characterId) {
       break;
   }
 
-
   console.log("Termina nueva población")
-  characterLi.innerHTML = `<b>${guardianClass}</b> ${race} ${sex} de nivel de luz <b>${characterId.light}</b>`;
+  characterLi.style.backgroundImage = characterEmblem;
+  characterP.innerHTML = `<b>${guardianClass}</b> ${race} ${sex} de nivel de luz <b>${characterId.light}</b>`;
+  characterLi.appendChild(characterP)
   userUl[0].appendChild(characterLi)
 }
 
