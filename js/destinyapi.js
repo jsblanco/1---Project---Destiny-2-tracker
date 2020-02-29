@@ -65,34 +65,36 @@ function steamDisplayNameQuery() {
 //Tenemos que meter steamPlayers.membershipId
 
 function membershipByPlatform() {
-  console.log("Empieza Membership ID")
+//log//  console.log("Empieza Membership ID")
   let searchQuery = searchInput.value
   console.log(searchQuery)
   steamPlayers.map(function (user) {
     fetch(`https://www.bungie.net/Platform/User/GetMembershipsById/${user.membershipId}/3/`, {
         headers: {
           "X-API-Key": "dd6e865e28924fad9ea265dfae890e35"
+          }
         }
-      })
+      )
       .then(response => response.json())
       .then(json => json.Response.destinyMemberships)
       .then(json => json.filter((memberships) => memberships.membershipType === 3 
-      && memberships.displayName.toLowerCase().includes(searchQuery.toLowerCase())
-      ))
-      .then((json) => {
-        populateResults(json)
-      })
-  })
+          && memberships.displayName.toLowerCase().includes(searchQuery.toLowerCase())
+          )
+        )
+      .then(json => populateResults(json))
+    }
+  )
 }
 
 //Nos muestra la pantalla de inicio. Ahora mismo bebe de Membership Id pero la idea es que beba también de los personajes
 function populateResults(json) {
-  console.log("Añadiendo usuarios")
+//log//  console.log("Añadiendo usuarios")
   for (let i = 0; i < json.length; i++) {
     let newResult = document.createElement("ul")
     newResult.setAttribute("id", `${json[i].membershipId}`)
     let resultHeader = document.createElement("li")
-    resultHeader.innerHTML = `Identificador de Bungie: <b>${json[i].membershipId}</b> Nombre en Steam: <b>${json[i].displayName}</b>`;
+    resultHeader.innerHTML = `Nombre en Steam: <b>${json[i].displayName}</b>`
+    //+` Identificador de Bungie: <b>${json[i].membershipId}</b>`
     resultsList.appendChild(newResult);
     newResult.appendChild(resultHeader);
     getPlayerCharacters(json[i])
@@ -103,7 +105,8 @@ function populateResults(json) {
 //Nos hace una llamada por cada personaje del usuario a una nueva función, que extrae sus datos
 
 function getPlayerCharacters(membershipId) {
-  fetch(`https://www.bungie.net/Platform/Destiny2/3/Profile/${membershipId.membershipId}/?components=200`, {
+  //log// console.log("Empieza getPlayerCharacters")
+  fetch(`https://www.bungie.net/Platform/Destiny2/${membershipId.membershipType}//Profile/${membershipId.membershipId}/?components=200`, {
       headers: {
         "X-API-Key": "dd6e865e28924fad9ea265dfae890e35"
       }
@@ -116,15 +119,17 @@ function getPlayerCharacters(membershipId) {
     .then((roster) => {
 
       for (let characterId in roster) {
-        getCharacterInfo(membershipId.membershipId, characterId)
+        getCharacterInfo(membershipId, characterId)
       }
-    })
+    }
+  )
 }
+  //log// console.log("Termina getPlayerCharacters")
 
 //Esta función recibe el ID de cada personaje de la función anterior, y extrae todos los datos
 
 function getCharacterInfo(membershipId, characterId) {
-  fetch(`https://www.bungie.net/Platform/Destiny2/3/Profile/${membershipId}/Character/${characterId}/?components=200`, {
+  fetch(`https://www.bungie.net/Platform/Destiny2/${membershipId.membershipType}/Profile/${membershipId.membershipId}/Character/${characterId}/?components=200`, {
       headers: {
         "X-API-Key": "dd6e865e28924fad9ea265dfae890e35"
       }
@@ -137,7 +142,7 @@ function getCharacterInfo(membershipId, characterId) {
 //Coloca cada personaje bajo su cuenta de usuario usando el nº de usuario, que en populateResults añadimos como clase para cada Ul
 
 function populateCharacterInfo(characterId) {
-  console.log(`Añadiendo personajes para ${characterId.membershipId}`)
+  //log//  console.log(`Añadiendo personajes para ${characterId.membershipId}`)
   let userUl = document.getElementById(characterId.membershipId)
   let characterP = document.createElement("p")
   let characterEmblem = `url(https://www.bungie.net/${characterId.emblemBackgroundPath})`
@@ -170,8 +175,7 @@ function populateCharacterInfo(characterId) {
       race = "exo";
       break;
   }
-
-  console.log("Termina nueva población")
+  //log// console.log("Termina nueva población")
   characterLi.style.backgroundImage = characterEmblem;
   characterP.innerHTML = `<b>${guardianClass}</b> ${race} ${sex} de nivel de luz <b>${characterId.light}</b><br>     
   <i>Tiempo de juego: ${Math.floor(spentTime/60)} horas y ${spentTime%60} minutos.</i>`;

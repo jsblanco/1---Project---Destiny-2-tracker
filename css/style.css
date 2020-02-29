@@ -1,3 +1,7 @@
+*{
+    font-family: Gill Sans / Gill Sans MT, sans-serif;
+}
+
 .characterPill{
     background-size: cover !important;
     color: white !important;
