@@ -90,7 +90,7 @@ function populateResults(json) {
   console.log("Añadiendo usuarios")
   for (let i = 0; i < json.length; i++) {
     let newResult = document.createElement("ul")
-    newResult.setAttribute("class", `${json[i].membershipId}`)
+    newResult.setAttribute("id", `${json[i].membershipId}`)
     let resultHeader = document.createElement("li")
     resultHeader.innerHTML = `Identificador de Bungie: <b>${json[i].membershipId}</b> Nombre en Steam: <b>${json[i].displayName}</b>`;
     resultsList.appendChild(newResult);
@@ -138,12 +138,13 @@ function getCharacterInfo(membershipId, characterId) {
 
 function populateCharacterInfo(characterId) {
   console.log(`Añadiendo personajes para ${characterId.membershipId}`)
-  let userUl = document.getElementsByClassName(characterId.membershipId)
+  let userUl = document.getElementById(characterId.membershipId)
   let characterP = document.createElement("p")
   let characterEmblem = `url(https://www.bungie.net/${characterId.emblemBackgroundPath})`
   let characterLi = document.createElement("li")
   let spentTime = characterId.minutesPlayedTotal
-  characterLi.setAttribute("class", `${characterId.characterId} characterPill`)
+  characterLi.setAttribute("id", `${characterId.characterId}`)
+  characterLi.setAttribute("class", "characterPill")
   let guardianClass = "";
   let race = "";
   let sex = (characterId.genderType === 0? "varón" : "mujer")
@@ -173,10 +174,10 @@ function populateCharacterInfo(characterId) {
   console.log("Termina nueva población")
   characterLi.style.backgroundImage = characterEmblem;
   characterP.innerHTML = `<b>${guardianClass}</b> ${race} ${sex} de nivel de luz <b>${characterId.light}</b><br>     
-  Tiempo de juego: ${Math.floor(spentTime/60)} horas y ${spentTime%60} minutos.`;
+  <i>Tiempo de juego: ${Math.floor(spentTime/60)} horas y ${spentTime%60} minutos.</i>`;
   characterLi.appendChild(characterP)
-  userUl[0].appendChild(characterLi)
-  userUl[0].appendChild(spentTimeLi)
+  userUl.appendChild(characterLi)
+  userUl.appendChild(spentTimeLi)
 }
 
 
