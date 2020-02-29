@@ -14,83 +14,123 @@
 
 <body>
 
-    <header>
 
-        <h1>Destiny 2 profile checker</h1>
-        <p>Simple profile checker using Bungie API as a project for a novice web developer</p>
-
-        <input id="steam-name-input" type="text" placeholder="Input your Steam display name" />
-        <button id="search-button"> Search for a Steam display name </button>
-
+    <header class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top d-flex justify-content-between pt-5  pb-1">
+            <div class="col-lg-3 col-md-12">
+                <div class="row py-4">
+                    <button type="button" class="navbar-toggler bg-light" data-toggle="collapse"
+                    data-target="#nav"><span class="fas fa-bars"></span></button>   
+                    <h1 class="font-weight-bold pl-2 text-center">Destiny 2 tracker</h1>
+                </div>
+            </div>
+            <div class="search col-lg-4 col-sm-8 ">
+                <i class="fas fa-search text-light"></i>
+                <input id="steam-name-input" type="text" placeholder="Type your Steam display name">
+            </div>
+            <button id="search-button" class="btn btn-info col-lg-2 col-sm-8"> Search </button>
+            <div class="col-lg-5">
+                <div class="collapse navbar-collapse pl-5" id="nav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a class="nav-link px3 font-weight-bold text-white" href="#">Home</a></li>
+                        <li class="nav-item"><a class="nav-link px3 text-light" href="#">Login</a></li>
+                        <li class="nav-item"><a class="nav-link px3 text-light" href="#">Registro</a></li>
+                        <li class="nav-item"><a class="nav-link px3 text-light" href="#">FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
     </header>
-    
-    <div id="steam-results" class="row">
-        <ul class="col-xl-3 col-lg-4 col-sm-6"id="4611686018467782694">
-            <li class="userHeader">Nombre en Steam: <b>Cydonia</b></li>
-            <li id="2305843009299217882" class="characterPill"
-                style="background-image: url(&quot;https://www.bungie.net//common/destiny2_content/icons/e4945aec6a715ebcec6f62bb36d0debb.jpg&quot;);">
-                <p><b>Titán</b> exo varón. <b>968 luz</b><br>
-                    <i>769 horas y 59 minutos jugados.</i></p>
-            </li>
-            <li id="2305843009305415841" class="characterPill"
-                style="background-image: url(&quot;https://www.bungie.net//common/destiny2_content/icons/175d9dca4e2a347c671f83ab5d20e3af.jpg&quot;);">
-                <p><b>Hechicero</b> insomne mujer. <b>967 luz</b><br>
-                    <i>174 horas y 38 minutos jugados.</i></p>
-            </li>
-            <li id="2305843009305718959" class="characterPill"
-                style="background-image: url(&quot;https://www.bungie.net//common/destiny2_content/icons/e452c62485491a02fbc0e36f06d301d2.jpg&quot;);">
-                <p><b>Cazador</b> humano mujer. <b>969 luz</b><br>
-                    <i>152 horas y 38 minutos jugados.</i></p>
-            </li>
-            
-        </ul>
-        <ul class="col-xl-3 col-lg-4 col-sm-6"id="4611686018495006801">
-            <li class="userHeader">Nombre en Steam: <b>Cydonia</b></li>
-            <li id="2305843009572496257" class="characterPill"
-                style="background-image: url(&quot;https://www.bungie.net//common/destiny2_content/icons/ecafe3e611c54e78656b85b77c8ee2f7.jpg&quot;);">
-                <p><b>Titán</b> exo varón. <b>750 luz</b><br>
-                    <i>0 horas y 23 minutos jugados.</i></p>
-            </li>
-            <li id="2305843009571786506" class="characterPill"
-                style="background-image: url(&quot;https://www.bungie.net//common/destiny2_content/icons/73f5f779f40bfecb4690c395bc1941b9.jpg&quot;);">
-                <p><b>Hechicero</b> exo mujer. <b>751 luz</b><br>
-                    <i>0 horas y 12 minutos jugados.</i></p>
-            </li>
-            <li id="2305843009535615731" class="characterPill"
-                style="background-image: url(&quot;https://www.bungie.net//common/destiny2_content/icons/c895d91c921cddab769c33761166c449.jpg&quot;);">
-                <p><b>Cazador</b> insomne mujer. <b>903 luz</b><br>
-                    <i>35 horas y 35 minutos jugados.</i></p>
-            </li>
-            
-        </ul>
-        <ul class="col-xl-3 col-lg-4 col-sm-6"id="4611686018470674446">
-            <li class="userHeader">Nombre en Steam: <b>Cydonia</b></li>
-            <li id="2305843009321674614" class="characterPill"
-                style="background-image: url(&quot;https://www.bungie.net//common/destiny2_content/icons/08cebb3bff307cd54b7d5df8107027ca.jpg&quot;);">
-                <p><b>Hechicero</b> humano mujer. <b>535 luz</b><br>
-                    <i>27 horas y 37 minutos jugados.</i></p>
-            </li>
-            <li id="2305843009305159509" class="characterPill"
-                style="background-image: url(&quot;https://www.bungie.net//common/destiny2_content/icons/08cebb3bff307cd54b7d5df8107027ca.jpg&quot;);">
-                <p><b>Titán</b> exo mujer. <b>562 luz</b><br>
-                    <i>76 horas y 47 minutos jugados.</i></p>
-            </li>
-            <li id="2305843009526304416" class="characterPill"
-                style="background-image: url(&quot;https://www.bungie.net//common/destiny2_content/icons/e452c62485491a02fbc0e36f06d301d2.jpg&quot;);">
-                <p><b>Cazador</b> exo mujer. <b>750 luz</b><br>
-                    <i>2 horas y 16 minutos jugados.</i></p>
-            </li>
-            
-        </ul>
-        <ul class="col-xl-3 col-lg-4 col-sm-6"id="4611686018491259992">
-            <li class="userHeader">Nombre en Steam: <b>Cydonia</b></li>
-            <li id="2305843009509017269" class="characterPill"
-                style="background-image: url(&quot;https://www.bungie.net//common/destiny2_content/icons/73f5f779f40bfecb4690c395bc1941b9.jpg&quot;);">
-                <p><b>Hechicero</b> exo mujer. <b>782 luz</b><br>
-                    <i>3 horas y 58 minutos jugados.</i></p>
-            </li>
-        </ul>
-    </div>
+
+
+
+
+
+
+
+
+
+    <section id="content" class="container-fluid">
+        <div id="status" class="row text-center my-2">
+            <h4 id="loadingResults" class="w-100 font-weight-bold">Selecciona tu personaje</h4>
+        </div>
+        <div id="steam-results" class="row d-flex justify-content-center my-2">
+            <ul id="4611686018467782694" class="col-xl-3 col-lg-4 col-md-6 col-xs-8">
+                <li class="userHeader">Nombre en Steam: <b>Cydonia</b></li>
+                <li id="2305843009299217882" class="characterPill"
+                    style="background-image: url(&quot;https://www.bungie.net//common/destiny2_content/icons/e4945aec6a715ebcec6f62bb36d0debb.jpg&quot;);">
+                    <p><b>Titán</b> exo varón. <b>968 luz</b><br>
+                        <i>769 horas y 59 minutos jugados.</i></p>
+                </li>
+                <li id="2305843009305718959" class="characterPill"
+                    style="background-image: url(&quot;https://www.bungie.net//common/destiny2_content/icons/e452c62485491a02fbc0e36f06d301d2.jpg&quot;);">
+                    <p><b>Cazador</b> humano mujer. <b>969 luz</b><br>
+                        <i>152 horas y 38 minutos jugados.</i></p>
+                </li>
+                <li id="2305843009305415841" class="characterPill"
+                    style="background-image: url(&quot;https://www.bungie.net//common/destiny2_content/icons/175d9dca4e2a347c671f83ab5d20e3af.jpg&quot;);">
+                    <p><b>Hechicero</b> insomne mujer. <b>967 luz</b><br>
+                        <i>174 horas y 38 minutos jugados.</i></p>
+                </li>
+            </ul>
+            <ul id="4611686018495006801" class="col-xl-3 col-lg-4 col-md-6 col-xs-8">
+                <li class="userHeader">Nombre en Steam: <b>Cydonia</b></li>
+                <li id="2305843009535615731" class="characterPill"
+                    style="background-image: url(&quot;https://www.bungie.net//common/destiny2_content/icons/c895d91c921cddab769c33761166c449.jpg&quot;);">
+                    <p><b>Cazador</b> insomne mujer. <b>903 luz</b><br>
+                        <i>35 horas y 35 minutos jugados.</i></p>
+                </li>
+                <li id="2305843009571786506" class="characterPill"
+                    style="background-image: url(&quot;https://www.bungie.net//common/destiny2_content/icons/73f5f779f40bfecb4690c395bc1941b9.jpg&quot;);">
+                    <p><b>Hechicero</b> exo mujer. <b>751 luz</b><br>
+                        <i>0 horas y 12 minutos jugados.</i></p>
+                </li>
+                <li id="2305843009572496257" class="characterPill"
+                    style="background-image: url(&quot;https://www.bungie.net//common/destiny2_content/icons/ecafe3e611c54e78656b85b77c8ee2f7.jpg&quot;);">
+                    <p><b>Titán</b> exo varón. <b>750 luz</b><br>
+                        <i>0 horas y 23 minutos jugados.</i></p>
+                </li>
+            </ul>
+            <ul id="4611686018491259992" class="col-xl-3 col-lg-4 col-md-6 col-xs-8">
+                <li class="userHeader">Nombre en Steam: <b>Cydonia</b></li>
+                <li id="2305843009509017269" class="characterPill"
+                    style="background-image: url(&quot;https://www.bungie.net//common/destiny2_content/icons/73f5f779f40bfecb4690c395bc1941b9.jpg&quot;);">
+                    <p><b>Hechicero</b> exo mujer. <b>782 luz</b><br>
+                        <i>3 horas y 58 minutos jugados.</i></p>
+                </li>
+            </ul>
+            <ul id="4611686018470674446" class="col-xl-3 col-lg-4 col-md-6 col-xs-8">
+                <li class="userHeader">Nombre en Steam: <b>Cydonia</b></li>
+                <li id="2305843009305159509" class="characterPill"
+                    style="background-image: url(&quot;https://www.bungie.net//common/destiny2_content/icons/08cebb3bff307cd54b7d5df8107027ca.jpg&quot;);">
+                    <p><b>Titán</b> exo mujer. <b>562 luz</b><br>
+                        <i>76 horas y 47 minutos jugados.</i></p>
+                </li>
+                <li id="2305843009526304416" class="characterPill"
+                    style="background-image: url(&quot;https://www.bungie.net//common/destiny2_content/icons/e452c62485491a02fbc0e36f06d301d2.jpg&quot;);">
+                    <p><b>Cazador</b> exo mujer. <b>750 luz</b><br>
+                        <i>2 horas y 16 minutos jugados.</i></p>
+                </li>
+                <li id="2305843009321674614" class="characterPill"
+                    style="background-image: url(&quot;https://www.bungie.net//common/destiny2_content/icons/08cebb3bff307cd54b7d5df8107027ca.jpg&quot;);">
+                    <p><b>Hechicero</b> humano mujer. <b>535 luz</b><br>
+                        <i>27 horas y 37 minutos jugados.</i></p>
+                </li>
+            </ul>
+        </div>
+    </section>
+
 </body>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+</script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+</script>
 
 </html>
