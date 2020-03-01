@@ -3,8 +3,13 @@
 //https://bungie-net.github.io/multi/operation_get_User-SearchUsers.html#operation_get_User-SearchUsers
 //COMPONENTS PARA LA API:
 //https://bungie-net.github.io/multi/schema_Destiny-DestinyComponentType.html
-//Components are added after the fetch URL, inside the ticks, like this: /?components=200 
-My profileId: 4611686018467782694
+//Components se añaden después de la URL fetch, dentro de los backticks, ya en número o en texto, y separados por comas: /?components=200 
+//MANIFEST DE DESTINY: por si llego al backlog de la página de inventario y quiero incluir los nombres de las armas
+// https://www.bungie.net/platform/Destiny2/Manifest/
+//Destiny item manifest lite:
+//'/common/destiny2_content/json/es/DestinyInventoryItemLiteDefinition-2fbe1829-dfcd-44ec-84d3-bb04a3777dc1.json',
+
+My membershipId: 4611686018467782694
 Steam membershipType: 3
 */
 
@@ -182,8 +187,7 @@ function membershipByPlatform(steamPlayers, membershipType) {
       )
       .then(response => response.json())
       .then(json => json.Response.destinyMemberships)
-      .then(json => json.filter((memberships) => memberships.membershipType === 3 
-          && memberships.displayName.toLowerCase().includes(searchQuery.toLowerCase())
+      .then(json => json.filter((memberships) => memberships.displayName.toLowerCase().includes(searchQuery.toLowerCase())
           )
         )
       .then(json => populateResults(json))
@@ -295,7 +299,62 @@ function populateCharacterInfo(characterId) {
 
 
 
-/* Consultar con los TAs: ¿Por qué me dice que usernameFetch() no es una función?
+/* 
+
+Fetches preparados para el futuro:
+
+//Consigue el equipo del personaje. Está codificado; necesitas una llamada a la API con Equipment[i].itemInstanceId (es un array de objetos)
+
+function getEquipmentInfo() {
+    fetch(`https://www.bungie.net/Platform/Destiny2/${membershipId.membershipType}/Profile/${membershipId.membershipId}/Character/${characterId}/?components=200`,  {
+      headers: {
+        "X-API-Key": "dd6e865e28924fad9ea265dfae890e35"
+      }
+    })
+    .then(response => response.json())
+    .then(data => data.Response.equipment.data.items)
+    .then (equipment => console.log(equipment))
+}
+
+
+
+//Sacamos los itemHash de la función anterior y los buscamos en el jSON que obtenemos con la siguiente, que nos indica, en castellano, todos los detalles del arma
+
+  fetch(`https://www.bungie.net/common/destiny2_content/json/es/DestinyInventoryBucketDefinition-2fbe1829-dfcd-44ec-84d3-bb04a3777dc1.json`, {
+
+
+
+function getItemManifest(){
+  fetch(`https://www.bungie.net/common/destiny2_content/json/es/DestinyInventoryItemLiteDefinition-2fbe1829-dfcd-44ec-84d3-bb04a3777dc1.json`, {
+      headers: {
+        "X-API-Key": "dd6e865e28924fad9ea265dfae890e35"
+      }
+    })
+    .then(response => response.json())
+    .then(response => let itemManifest = response)
+}
+
+
+*/
+
+
+/*
+//Si alguna vez necesito consultar el Manifest global, lo tengo aquí:
+
+function getManifest() {
+fetch(`https://www.bungie.net/platform/Destiny2/Manifest/`, {
+      headers: {
+        "X-API-Key": "dd6e865e28924fad9ea265dfae890e35"
+      }
+      })
+    .then(response => response.json())
+    .then (json => console.log(json.Response))
+}
+getManifest()
+
+*/
+
+/*Consultar con los TAs: ¿Por qué me dice que usernameFetch() no es una función?
 
 
 function usernameFetch(){
