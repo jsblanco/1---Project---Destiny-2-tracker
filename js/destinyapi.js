@@ -167,10 +167,6 @@ function playstationDisplayNameQuery() {
     //log//.then (()=>console.log("Termina steamDisplayNameQuery"))
     }
 
-
-
-
-
 //Aquí consigues el membershipID específico de Destiny 2
 //Tenemos que meter steamPlayers.membershipId
 
@@ -201,7 +197,7 @@ function populateResults(json) {
   for (let i = 0; i < json.length; i++) {
     let newResult = document.createElement("ul")
     newResult.setAttribute("id", `${json[i].membershipId}`)
-    newResult.setAttribute("class", "col-xl-3 col-lg-4 col-md-8")
+    newResult.setAttribute("class", "col-xl-3 col-lg-4 col-md-8 d-none")
     let resultHeader = document.createElement("li")
     resultHeader.setAttribute("class", "userHeader")
     resultHeader.innerHTML = `<b>${json[i].displayName}</b>`
@@ -293,6 +289,7 @@ function populateCharacterInfo(characterId) {
   <i>${Math.floor(spentTime/60)} horas y ${spentTime%60} minutos jugados.</i>`;
   charactersFound()
   characterLi.appendChild(characterP)
+  userUl.classList.remove("d-none")
   userUl.appendChild(characterLi)
   userUl.appendChild(spentTimeLi)
 }
