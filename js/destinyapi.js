@@ -26,174 +26,104 @@ const queryStatus = document.getElementById("status")
 searchSteam.onclick = () => {
   //console.log("Búsqueda de Steam se inicia")
   resultsList.innerHTML = ""
-  isInputValid()? steamDisplayNameQuery():invalidInput()
+  isInputValid() ? displayNameQuery(3) : invalidInput()
 }
 
 searchPlaystation.onclick = () => {
   //console.log("Búsqueda de Steam se inicia")
   resultsList.innerHTML = ""
-  isInputValid()? playstationDisplayNameQuery():invalidInput()
+  isInputValid() ? displayNameQuery(2) : invalidInput()
 }
 
 searchXbox.onclick = () => {
   //console.log("Búsqueda de Steam se inicia")
   resultsList.innerHTML = ""
-  isInputValid()? xBoxDisplayNameQuery():invalidInput()
+  isInputValid() ? displayNameQuery(1) : invalidInput()
 }
 
 
 
-function isInputValid(){
+function isInputValid() {
   if (searchInput.value != "") {
     return true
   } else {
-    
-    return false}
-  }
 
-function invalidInput(){
-pleaseInputAccountName= document.createElement("h3")
-pleaseInputAccountName.setAttribute("class", "text-danger w-100 font-weight-bold mx-3 text-center")
-pleaseInputAccountName.innerHTML="Por favor, incluye un nombre de cuenta válido"
-resultsList.appendChild(pleaseInputAccountName);
+    return false
+  }
 }
 
+function invalidInput() {
+  pleaseInputAccountName = document.createElement("h3")
+  pleaseInputAccountName.setAttribute("class", "text-danger w-100 font-weight-bold mx-3 text-center")
+  pleaseInputAccountName.innerHTML = "Por favor, incluye un nombre de cuenta válido"
+  resultsList.appendChild(pleaseInputAccountName);
+}
 
 //Estas funciones nos añaden un mensaje de Cargando, y luego los eliminan o sustituyen a medida que encuentran usuarios y personajes
-
-function addLoadingMessage(){
-  selectYourAccount= document.createElement("h4")
+function addLoadingMessage() {
+  selectYourAccount = document.createElement("h4")
   selectYourAccount.setAttribute("id", "loadingResults")
   selectYourAccount.setAttribute("class", "w-100 font-weight-bold mx-3")
-  selectYourAccount.innerHTML=`Cargando los resultados...`
-  noResults=document.createElement("p")
+  selectYourAccount.innerHTML = `Cargando los resultados...`
+  noResults = document.createElement("p")
   noResults.setAttribute("id", "noResults")
   noResults.setAttribute("class", "w-100 font-weight-bold text-muted mx-3")
-  noResults.innerHTML=`<i>¿No aparecen resultados? Prueba a reformular tu búsqueda</i>`
+  noResults.innerHTML = `<i>¿No aparecen resultados? Prueba a reformular tu búsqueda</i>`
   queryStatus.appendChild(selectYourAccount);
   queryStatus.appendChild(noResults);
 }
 
-function usersFound(){
+function charactersFound() {
   let loadingMessage = document.querySelector('#loadingResults');
-  let noResults = document.querySelector('#noResults');
-  loadingMessage.innerHTML="Cuentas registradas en Bungie para esta plataforma:";
-  noResults.parentNode.removeChild(noResults);
+  noResults.innerHTML= ""
+  loadingMessage.innerHTML = "Selecciona tu personaje";
 }
-
-function charactersFound(){
-  let loadingMessage = document.querySelector('#loadingResults');
-  loadingMessage.innerHTML="Selecciona tu personaje";
-}
-
 
 //COMIENZA LO DIVERTIDO
-//Haremos tres funciones distintas, una por plataforma. 
-
 //Aquí consigo un array con todos los usuarios de Steam. 
 //Lo usaremos para extraer sus personajes y sus iconos mediante su membershipId
+//El parámetro membershipType lo iremos pasando desde el inicio hasta la última función, que es donde se usará finalmente.
 
-function steamDisplayNameQuery() {
-//log// console.log("Empieza steamDisplayNameQuery")
-let user = searchInput.value
-    queryStatus.innerHTML=""
-    resultsList.innerHTML = ""
-    addLoadingMessage()
-    fetch(`https://www.bungie.net/Platform/User/SearchUsers/?q=${user}`, {
-        headers: {
-          "X-API-Key": apiKey
-        }
-      })
-      .then(response => response.json())
-      .then(json => json.Response)
-      .then(function (players) {
-        return players.filter(function (player) {
-          return (player.steamDisplayName);
-        }
-      )
-    }
-  )
-  .then ((steamPlayers) => membershipByPlatform(steamPlayers, 3))
-//log//.then (()=>console.log("Termina steamDisplayNameQuery"))
+function displayNameQuery(membershipType) {
+  //log// console.log("Empieza displayNameQuery")
+  let user = searchInput.value
+  queryStatus.innerHTML = ""
+  resultsList.innerHTML = ""
+  addLoadingMessage()
+  fetch(`https://www.bungie.net/Platform/User/SearchUsers/?q=${user}`, {
+      headers: {
+        "X-API-Key": apiKey
+      }
+    })
+    .then(response => response.json())
+    .then(json => json.Response)
+    .then((steamPlayers) => membershipByPlatform(steamPlayers, membershipType))
+  //log//.then (()=>console.log("Termina displayNameQuery"))
 }
-
-function playstationDisplayNameQuery() {
-  //log// console.log("Empieza steamDisplayNameQuery")
-    let user = searchInput.value
-    queryStatus.innerHTML=""
-    resultsList.innerHTML = ""
-    addLoadingMessage()
-    fetch(`https://www.bungie.net/Platform/User/SearchUsers/?q=${user}`, {
-        headers: {
-          "X-API-Key": apiKey
-        }
-      })
-      .then(response => response.json())
-      .then(json => json.Response)
-      .then(function (players) {
-         return players.filter(function (player) {
-            return (player.psnDisplayName);
-            }
-          );
-        }
-      )
-
-  .then(playStationPlayers => membershipByPlatform(playStationPlayers, 1))
-  //log//.then (()=>console.log("Termina steamDisplayNameQuery"))
-  }
-
-  function xBoxDisplayNameQuery() {
-    //log// console.log("Empieza steamDisplayNameQuery")
-      let user = searchInput.value
-      queryStatus.innerHTML=""
-      resultsList.innerHTML = ""
-      addLoadingMessage()
-      fetch(`https://www.bungie.net/Platform/User/SearchUsers/?q=${user}`, {
-          headers: {
-            "X-API-Key": apiKey
-          }
-        })
-        .then(response => response.json())
-        .then(json => json.Response)
-        .then(function (players) {
-           return players.filter(function (player) {
-              return (player.xboxDisplayName);
-              }
-            );
-          }
-        )
-  
-    .then(xBoxPlayers => membershipByPlatform(xBoxPlayers, 2))
-    //log//.then (()=>console.log("Termina steamDisplayNameQuery"))
-    }
 
 //Aquí consigues el membershipID específico de Destiny 2
 //Tenemos que meter steamPlayers.membershipId
 
 function membershipByPlatform(steamPlayers, membershipType) {
-//log//  console.log("Empieza Membership ID")
+  //log//  console.log("Empieza Membership ID")
   let searchQuery = searchInput.value
   console.log(searchQuery)
   steamPlayers.map(function (user) {
     fetch(`https://www.bungie.net/Platform/User/GetMembershipsById/${user.membershipId}/${membershipType}/`, {
         headers: {
           "X-API-Key": "dd6e865e28924fad9ea265dfae890e35"
-          }
         }
-      )
+      })
       .then(response => response.json())
       .then(json => json.Response.destinyMemberships)
-      .then(json => json.filter((memberships) => memberships.displayName.toLowerCase().includes(searchQuery.toLowerCase())
-          )
-        )
-      .then(json => populateResults(json))
-    }
-  )
+      .then(json => json.filter((memberships) => memberships.displayName.toLowerCase().includes(searchQuery.toLowerCase())))
+      .then(json => populateResults(json, membershipType))
+  })
 }
 
 //Nos muestra la pantalla de inicio. Ahora mismo bebe de Membership Id
-function populateResults(json) {
-//log//  console.log("Añadiendo usuarios")
+function populateResults(json, membershipType) {
+  //log//  console.log("Añadiendo usuarios")
   for (let i = 0; i < json.length; i++) {
     let newResult = document.createElement("ul")
     newResult.setAttribute("id", `${json[i].membershipId}`)
@@ -204,15 +134,14 @@ function populateResults(json) {
     //+` Identificador de Bungie: <b>${json[i].membershipId}</b>`
     resultsList.appendChild(newResult);
     newResult.appendChild(resultHeader);
-    getPlayerCharacters(json[i])
+    getPlayerCharacters(json[i], membershipType)
   }
-usersFound()
 }
 
 //Esta función nos consigue el perfil de Destiny de cada jugador en base al membershipId que obtuvimos en membershipByPlatform, via populateResults
 //Nos hace una llamada por cada personaje del usuario a una nueva función, que extrae sus datos
 
-function getPlayerCharacters(membershipId) {
+function getPlayerCharacters(membershipId, membershipType) {
   //log// console.log("Empieza getPlayerCharacters")
   fetch(`https://www.bungie.net/Platform/Destiny2/${membershipId.membershipType}//Profile/${membershipId.membershipId}/?components=200`, {
       headers: {
@@ -227,71 +156,72 @@ function getPlayerCharacters(membershipId) {
     .then((roster) => {
 
       for (let characterId in roster) {
-        getCharacterInfo(membershipId, characterId)
+        getCharacterInfo(membershipId, characterId, membershipType)
       }
-    }
-  )
+    })
 }
-  //log// console.log("Termina getPlayerCharacters")
+//log// console.log("Termina getPlayerCharacters")
 
 //Esta función recibe el ID de cada personaje de la función anterior, y extrae todos los datos
 
-function getCharacterInfo(membershipId, characterId) {
+function getCharacterInfo(membershipId, characterId, membershipType) {
   fetch(`https://www.bungie.net/Platform/Destiny2/${membershipId.membershipType}/Profile/${membershipId.membershipId}/Character/${characterId}/?components=200`, {
       headers: {
         "X-API-Key": "dd6e865e28924fad9ea265dfae890e35"
       }
     })
     .then(response => response.json())
-    .then(data => populateCharacterInfo(data.Response.character.data))
+    .then(data => populateCharacterInfo(data.Response.character.data, membershipType))
 }
 
 //Recibe un array con la información de cada personaje de la función getCharacterInfo y la estructura y publica en el HTML
 //Coloca cada personaje bajo su cuenta de usuario usando el nº de usuario, que en populateResults añadimos como Id de cada Ul
 
-function populateCharacterInfo(characterId) {
+function populateCharacterInfo(characterId, membershipType) {
   //log//  console.log(`Añadiendo personajes para ${characterId.membershipId}`)
-  let userUl = document.getElementById(characterId.membershipId)
-  let characterP = document.createElement("p")
-  let characterEmblem = `url(https://www.bungie.net/${characterId.emblemBackgroundPath})`
-  let characterLi = document.createElement("li")
-  let spentTime = characterId.minutesPlayedTotal
-  characterLi.setAttribute("id", `${characterId.characterId}`)
-  characterLi.setAttribute("class", "characterPill")
-  let guardianClass = "";
-  let race = "";
-  let sex = (characterId.genderType === 0? "varón" : "mujer")
-  switch (characterId.classType) {
-    case 0:
-      guardianClass = "Titán";
-      break;
-    case 1:
-      guardianClass = "Cazador";
-      break;
-    case 2:
-      guardianClass = "Hechicero";
-      break;
-  }
-  switch (characterId.raceType) {
-    case 0:
-      race = "humano";
-      break;
-    case 1:
-      race = "insomne";
-      break;
-    case 2:
-      race = "exo";
-      break;
-  }
-  //log// console.log("Termina nueva población")
-  characterLi.style.backgroundImage = characterEmblem;
-  characterP.innerHTML = `<b>${guardianClass}</b> ${race} ${sex}. <b>${characterId.light} luz</b><br>     
+  if (characterId.membershipType === membershipType) {
+    let userUl = document.getElementById(characterId.membershipId)
+    let characterP = document.createElement("p")
+    let characterLi = document.createElement("li")
+    let characterEmblem = `url(https://www.bungie.net/${characterId.emblemBackgroundPath})`
+    let spentTime = characterId.minutesPlayedTotal
+    let guardianClass = "";
+    let race = "";
+    let sex = (characterId.genderType === 0 ? "varón" : "mujer")
+    switch (characterId.classType) {
+      case 0:
+        guardianClass = "Titán";
+        break;
+        case 1:
+          guardianClass = "Cazador";
+          break;
+          case 2:
+            guardianClass = "Hechicero";
+            break;
+          }
+          switch (characterId.raceType) {
+            case 0:
+              race = "humano";
+              break;
+              case 1:
+                race = "insomne";
+                break;
+                case 2:
+                  race = "exo";
+                  break;
+                }
+                //log// console.log("Termina nueva población")
+    characterLi.setAttribute("id", `${characterId.characterId}`)
+    characterLi.setAttribute("class", "characterPill")
+    characterLi.style.backgroundImage = characterEmblem;
+    characterP.innerHTML = `<b>${guardianClass}</b> ${race} ${sex}. <b>${characterId.light} luz</b><br>     
   <i>${Math.floor(spentTime/60)} horas y ${spentTime%60} minutos jugados.</i>`;
-  charactersFound()
-  characterLi.appendChild(characterP)
-  userUl.classList.remove("d-none")
-  userUl.appendChild(characterLi)
-  userUl.appendChild(spentTimeLi)
+    charactersFound()
+    characterLi.appendChild(characterP)
+    userUl.classList.remove("d-none")
+    userUl.appendChild(characterLi)
+    userUl.appendChild(spentTimeLi)
+  }
 }
 
 
