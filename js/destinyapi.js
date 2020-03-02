@@ -233,7 +233,7 @@ Fetches preparados para el futuro:
 //Consigue el equipo del personaje. Está codificado; necesitas una llamada a la API con Equipment[i].itemInstanceId (es un array de objetos)
 
 function getEquipmentInfo() {
-    fetch(`https://www.bungie.net/Platform/Destiny2/${membershipId.membershipType}/Profile/${membershipId.membershipId}/Character/${characterId}/?components=200`,  {
+    fetch(`https://www.bungie.net/Platform/Destiny2/${membershipId.membershipType}/Profile/${membershipId.membershipId}/Character/${characterId}/?components=205`,  {
       headers: {
         "X-API-Key": "dd6e865e28924fad9ea265dfae890e35"
       }
