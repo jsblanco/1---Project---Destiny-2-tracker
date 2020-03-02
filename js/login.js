@@ -14,7 +14,6 @@ loginButton.onclick = () => {
     event.preventDefault()
     deleteErrors();
     if (isUserRegistered(password.value, email.value)===true) {
-        console.log("yaaahooo")
     }
 }
 
@@ -24,10 +23,21 @@ function isUserRegistered(){
     let userDb = JSON.parse(localStorage.getItem("users"));
     let validUser = true;
 
+    if(!LoginValidator.checkPassword()){
+        LoginValidator.errorCreator("Por favor, introduce una contraseña válida")
+        validUser=false
+    }
+    
+    if(!LoginValidator.checkEmail()){
+        LoginValidator.errorCreator("Por favor, introduce un correo electrónico válido")
+        validUser=false
+    }
+
     if(!LoginValidator.isTheUserInTheDb()){
         LoginValidator.errorCreator("Este usuario no está registrado en la plataforma. Por favor, regístrate.")
         validUser=false
     }
+
     return validUser
 }
 
