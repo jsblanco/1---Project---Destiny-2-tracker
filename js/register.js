@@ -2,6 +2,8 @@ const searchSteam = document.getElementById("platform-steam")
 const searchPlaystation = document.getElementById("platform-playstation")
 const searchXbox = document.getElementById("platform-xbox")
 const searchInput = document.getElementById("username-field")
+const navBar = document.getElementById("navbar-nav")
+
 
 let name= document.getElementById("name-field")
 let username= document.getElementById("username-field")
@@ -24,8 +26,11 @@ registerButton.onclick = () => {
     if (isUserValid()) {
         createNewUser(name.value, username.value, password.value, email.value)
         welcomeMessage()
+        localStorage.setItem("loggedUser", username.value)
+        updateNavbar()
     }
 }
+
 
 function welcomeMessage() {
     statusMessage.innerHTML = "Bienvenido a Destiny 2 Tracker"

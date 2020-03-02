@@ -84,7 +84,6 @@ class loginValidator extends validator {
     constructor(password, email) {
         super(password, email);
     }
-
     isTheUserInTheDb() {
         let userExists = false;
         if (!userDb) {
@@ -98,5 +97,4 @@ class loginValidator extends validator {
         }
         return userExists;
     }
-
 }

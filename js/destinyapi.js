@@ -22,6 +22,10 @@ const searchInput = document.getElementById("search-input")
 const resultsList = document.getElementById("steam-results")
 const queryStatus = document.getElementById("status")
 
+//Revisa si hay un usuario dado de alta
+checkLoggedUser()
+userNavbar.onclick = () => logOff()
+
 
 searchSteam.onclick = () => {
   //console.log("Búsqueda de Steam se inicia")

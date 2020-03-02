@@ -17,8 +17,13 @@ loginButton.onclick = () => {
     deleteErrors();
     if (isUserRegistered(password.value, email.value) === true) {
         welcomeMessage()
+        checkUsername(email.value)
+        updateNavbar()
     }
 }
+
+
+
 
 function welcomeMessage() {
     statusMessage.innerHTML = "Bienvenido de vuelta"
@@ -27,6 +32,13 @@ function welcomeMessage() {
     welcomeMessage.innerHTML = "Tus personajes están donde los dejaste.<br>¿Te ayudamos a encontrarlos?"
     form.innerText = ""
     form.appendChild(welcomeMessage)
+
+    loginNavbar.classList.add("d-none")
+    registerNavbar.classList.add("d-none")
+    userNavbar.innerText= localStorage.loggedUser.value
+    userNavbar.classList.remove("d-none")
+    logoffNavbar.remove("d-none")
+    
 }
 
 
