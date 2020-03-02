@@ -16,50 +16,23 @@ const loginButton = document.getElementById("login-button")
 loginButton.onclick = () => {
     event.preventDefault()
     deleteErrors();
-    if (isUserValid()===true) {
-        createNewUser(name.value, userName.value, email.value, password.value)}
+    if (isUserRegistered()===true) {}
 }
 
-function isUserValid(){
+function isUserRegistered(){
     
-    let signUpValidator = new singUpValidator(name, username, password, passwordCheck, email)
+    let LoginValidator = new loginValidator(username, password)
     let userDb = JSON.parse(localStorage.getItem("users"));
     let validUser = true;
 
-    if(!signUpValidator.checkName()){
-        signUpValidator.errorCreator("Por favor, introduce un nombre válido", name)
-        validUser=false
-    }
-
-    if(!signUpValidator.checkUserName()){
-        signUpValidator.errorCreator("Por favor, introduce un nombre de usuario válido", userName)
-        validUser=false
-    }
-   
-    
-    if(!signUpValidator.checkPassword()){
-        signUpValidator.errorCreator("Por favor, introduce una contraseña válida", password)
-        validUser=false
-    }
-
-    if(!signUpValidator.checkRepeatedPassword()){
-        signUpValidator.errorCreator("Por favor, asegúrate de que ambas contraseñas son iguales", passwordCheck)
-        validUser=false
-    }
-    
-    if(!signUpValidator.checkEmail()){
-        signUpValidator.errorCreator("Por favor, introduce un correo electrónico válido", email)
-        validUser=false
-    }
-    
-    if(signUpValidator.isTheUserInTheDb()){
-        signUpValidator.errorCreator("Este correo ya está registrado, prueba a hacer Login", loginButton)
+    if(!LoginValidator.checkName()){
+        LoginValidator.errorCreator("Este usuario no está registrado en la plataforma. Por favor, regístrate.")
         validUser=false
     }
     return validUser
 }
 
-/*
-    errorCreator (message, location) {}
-    deleteErrors (){}
-  */  
+function deleteErrors (){
+    let errors = [...document.getElementsByClassName("error")]
+    errors ? errors.forEach(error => error.remove()) : null;
+}

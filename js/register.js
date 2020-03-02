@@ -19,56 +19,58 @@ const registerButton = document.getElementById("register-button")
 registerButton.onclick = () => {
     event.preventDefault()
     deleteErrors();
-    if (isUserValid()===true) {
-        createNewUser(name.value, name.value, email.value, password.value)}
+    if (isUserValid()) {
+        createNewUser(name.value, username.value, password.value, email.value)}
 }
-
-
 
 function isUserValid(){
     
-    let signUpValidation = new signUpValidator(name.value, username.value, password.value, passwordCheck.value, email.value)
+    let signUpValidation = new signUpValidator(username.value, password.value, email.value, name.value, passwordCheck.value)
+
+    console.log(signUpValidation)
     let validUser = true;
 
     if(!signUpValidation.checkName()){
-        signUpValidation.errorCreator("Por favor, introduce un nombre válido", name)
+        signUpValidation.errorCreator("Por favor, introduce un nombre válido")
         validUser=false
     }
 
     if(!signUpValidation.checkUserName()){
-        signUpValidation.errorCreator("Por favor, introduce un nombre de usuario válido", username)
+        signUpValidation.errorCreator("Por favor, introduce un nombre de usuario válido")
         validUser=false
     }
    
     
     if(!signUpValidation.checkPassword()){
-        signUpValidation.errorCreator("Por favor, introduce una contraseña válida", password)
+        signUpValidation.errorCreator("Por favor, introduce una contraseña válida")
         validUser=false
     }
 
     if(!signUpValidation.checkRepeatedPassword()){
-        signUpValidation.errorCreator("Por favor, asegúrate de que ambas contraseñas son iguales", passwordCheck)
+        signUpValidation.errorCreator("Por favor, asegúrate de que ambas contraseñas son iguales")
         validUser=false
     }
     
     if(!signUpValidation.checkEmail()){
-        signUpValidation.errorCreator("Por favor, introduce un correo electrónico válido", email)
+        signUpValidation.errorCreator("Por favor, introduce un correo electrónico válido")
         validUser=false
     }
-    
-    if(signUpValidation.isTheUserInTheDb(userDb)){
-        signUpValidation.errorCreator("Este correo ya está registrado, prueba a hacer Login", loginButton)
+     if(!signUpValidation.isTheUserInTheDb(userDb)){
+        signUpValidation.errorCreator("Este correo ya está registrado, prueba a hacer Login")
         validUser=false
-    }
+    } 
     return validUser
 }
+
+
+function createNewUser (name, username, password, email) {
+    const newUser = new User (name, username, password, email)
+    userDb? userDd.push(newUser) :  userDb = [newUser]
+    localStorage.setItem('users', JSON.stringify(userDb));
+} 
+
 
 function deleteErrors (){
     let errors = [...document.getElementsByClassName("error")]
     errors ? errors.forEach(error => error.remove()) : null;
 }
-
-/*
-    errorCreator (message, location) {}
-    deleteErrors (){}
-  */  
