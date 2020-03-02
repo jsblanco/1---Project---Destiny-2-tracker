@@ -26,7 +26,7 @@
             </div>
             <div class="input-field col-xl-4 col-lg-3 col-sm-12 ">
                 <i class="fas fa-search text-light"></i>
-                <input id="username-input" type="text" placeholder="Indica tu usuario de Destiny 2">
+                <input id="search-input" type="text" placeholder="Indica tu usuario de Destiny 2">
             </div>
             <button id="platform-steam" class="btn btn-dark col-lg-1 col-sm-4"><i class="fab fa-steam mr-2"></i> Steam
             </button>
@@ -50,48 +50,51 @@
 
     <section id="content" class="container-fluid">
         <div id="status" class="row py-2 justify-content-center">
-            <h2 class="text-center">Regístrate en Destiny 2 tracker</h2>
+            <div class="col text-center">
+                <h2 class="text-center">Regístrate en Destiny 2 tracker</h2>
+                <ul id="error-list"></ul>
+            </div>
         </div>
-        <div class="row justify-content-center my-1">
+        <div id="form" class="row justify-content-center my-1">
             <div class=" col-lg-7 col-sm-10 pt-1 pb-4 mb-5 forms">
                 <div class="row">
                     <div class="col-lg-6 col-sm-12">
-                        <label for="username-input" class="text-light pl-2 pt-3">Nombre y apellidos:</label><br>
+                        <label for="name-input" class="text-light pl-2 pt-3">Nombre y apellidos:</label><br>
                         <div class="input-field">
                             <i class="fas fa-address-card text-light"></i>
-                            <input id="name-input" type="text" placeholder="p.ej. Javier García">
+                            <input id="name-field" type="text" placeholder="p.ej. Javier García">
                         </div>
                     </div>
                     <div  class="col-lg-6 col-sm-12">
-                        <label for="username-input" class="text-light pl-2 pt-3">Nombre de usuario:</label><br>
+                        <label for="username-field" class="text-light pl-2 pt-3">Nombre de usuario:</label><br>
                         <div class="input-field">
                             <i class="fas fa-user text-light"></i>
-                            <input id="username-input" type="text" placeholder="p.ej. DattoWatto">
+                            <input id="username-field" type="text" placeholder="p.ej. DattoWatto">
                         </div>                       
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-6 col-sm-12">
-                        <label for="password-input" class="text-light pl-2 pt-3">Contraseña:</label><br>
+                        <label for="password-field" class="text-light pl-2 pt-3">Contraseña:</label><br>
                         <div class="input-field">
                             <i class="fas fa-key text-light"></i>
-                            <input id="password-input" type="password" placeholder="Contraseña">
+                            <input id="password-field" type="password" placeholder="Contraseña">
                         </div>
                     </div>
                     <div  class="col-lg-6 col-sm-12">
                         <label for="password-check" class="text-light pl-2 pt-3">Repite tu contraseña:</label><br>
                         <div class="input-field">
                             <i class="fas fa-key text-light"></i>
-                            <input id="password-input" type="password" placeholder="Contraseña">
+                            <input id="password-check" type="password" placeholder="Contraseña">
                         </div>                        
                     </div>
                 </div>
                 <div class="row justify-content-center">
                     <div class="col-lg-12">
-                        <label for="password-input" class="text-light pl-2 pt-3">Correo electrónico:</label><br>
+                        <label for="email-field" class="text-light pl-2 pt-3">Correo electrónico:</label><br>
                         <div class="input-field">
                             <i class="fas fa-envelope-open text-light"></i>
-                            <input id="email-input" type="email" placeholder="p.ej. datto@bungie.net">
+                            <input id="email-field" type="email" placeholder="p.ej. datto@bungie.net">
                         </div>      
                     </div>
                 </div>
@@ -116,6 +119,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     </script>
-    <script src="/js/destinyapi.js"></script>
+    <script src="/js/register.js"></script>
+    <script src="/js/validator.js"></script>
     </body>
     </html>

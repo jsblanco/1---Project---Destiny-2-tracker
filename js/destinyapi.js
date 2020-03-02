@@ -18,7 +18,7 @@ var apiKey = "dd6e865e28924fad9ea265dfae890e35";
 const searchSteam = document.getElementById("platform-steam")
 const searchPlaystation = document.getElementById("platform-playstation")
 const searchXbox = document.getElementById("platform-xbox")
-const searchInput = document.getElementById("username-input")
+const searchInput = document.getElementById("search-input")
 const resultsList = document.getElementById("steam-results")
 const queryStatus = document.getElementById("status")
 
@@ -111,7 +111,7 @@ function membershipByPlatform(steamPlayers, membershipType) {
   steamPlayers.map(function (user) {
     fetch(`https://www.bungie.net/Platform/User/GetMembershipsById/${user.membershipId}/${membershipType}/`, {
         headers: {
-          "X-API-Key": "dd6e865e28924fad9ea265dfae890e35"
+          "X-API-Key": apiKey
         }
       })
       .then(response => response.json())
@@ -145,7 +145,7 @@ function getPlayerCharacters(membershipId, membershipType) {
   //log// console.log("Empieza getPlayerCharacters")
   fetch(`https://www.bungie.net/Platform/Destiny2/${membershipId.membershipType}//Profile/${membershipId.membershipId}/?components=200`, {
       headers: {
-        "X-API-Key": "dd6e865e28924fad9ea265dfae890e35"
+        "X-API-Key": apiKey
       }
     })
     .then(response => response.json())
@@ -167,7 +167,7 @@ function getPlayerCharacters(membershipId, membershipType) {
 function getCharacterInfo(membershipId, characterId, membershipType) {
   fetch(`https://www.bungie.net/Platform/Destiny2/${membershipId.membershipType}/Profile/${membershipId.membershipId}/Character/${characterId}/?components=200`, {
       headers: {
-        "X-API-Key": "dd6e865e28924fad9ea265dfae890e35"
+        "X-API-Key": apiKey
       }
     })
     .then(response => response.json())
@@ -235,7 +235,7 @@ Fetches preparados para el futuro:
 function getEquipmentInfo() {
     fetch(`https://www.bungie.net/Platform/Destiny2/${membershipId.membershipType}/Profile/${membershipId.membershipId}/Character/${characterId}/?components=205`,  {
       headers: {
-        "X-API-Key": "dd6e865e28924fad9ea265dfae890e35"
+        "X-API-Key": apiKey
       }
     })
     .then(response => response.json())
@@ -254,7 +254,7 @@ function getEquipmentInfo() {
 function getItemManifest(){
   fetch(`https://www.bungie.net/common/destiny2_content/json/es/DestinyInventoryItemLiteDefinition-2fbe1829-dfcd-44ec-84d3-bb04a3777dc1.json`, {
       headers: {
-        "X-API-Key": "dd6e865e28924fad9ea265dfae890e35"
+        "X-API-Key": apiKey
       }
     })
     .then(response => response.json())
@@ -271,7 +271,7 @@ function getItemManifest(){
 function getManifest() {
 fetch(`https://www.bungie.net/platform/Destiny2/Manifest/`, {
       headers: {
-        "X-API-Key": "dd6e865e28924fad9ea265dfae890e35"
+        "X-API-Key": apiKey
       }
       })
     .then(response => response.json())
