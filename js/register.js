@@ -25,7 +25,7 @@ registerButton.onclick = () => {
 
 function isUserValid(){
     
-    let signUpValidation = new signUpValidator(username.value, password.value, email.value, name.value, passwordCheck.value)
+    let signUpValidation = new signUpValidator(password.value, email.value, name.value, username.value, passwordCheck.value)
 
     console.log(signUpValidation)
     let validUser = true;

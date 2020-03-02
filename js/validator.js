@@ -8,14 +8,9 @@ class User {
 }
 
 class validator {
-    constructor(username, password, email) {
-        this.username = username;
+    constructor(password, email) {
         this.password = password;
         this.email = email;
-    }
-
-    checkUserName() {
-        return this.username.length > 3 ? true : false
     }
 
     checkPassword() {
@@ -47,48 +42,61 @@ class validator {
 
 
 class signUpValidator extends validator {
-    constructor(username, password, email, name, passwordCheck) {
-        super(username, password, email);
-            this.name = name;
-            this.passwordCheck = passwordCheck;
+    constructor(password, email, name, username, passwordCheck) {
+        super(password, email);
+        this.name = name;
+        this.username = username;
+        this.passwordCheck = passwordCheck;
     }
 
     checkName() {
         return this.name.length > 1 ? true : false
     }
+
+    checkUserName() {
+        return this.username.length > 3 ? true : false
+    }
+
     checkRepeatedPassword() {
         return this.passwordCheck === this.password ? true : false
     }
+
     isTheUserInTheDb(userDb) {
         console.log(this.email)
         let userExists = true;
 
-        if (!userDb){
+        if (!userDb) {
             return true;
-        }
-        else{
+        } else {
             userDb.forEach(user => {
-                if (user.email === this.email){
-                    userExists=false
+                if (user.email === this.email) {
+                    userExists = false
                 }
             })
         }
         return userExists;
     }
-    
+
 }
 
 
 class loginValidator extends validator {
-    constructor() {
-        super();
+    constructor(password, email) {
+        super(password, email);
     }
 
     isTheUserInTheDb() {
+        let userExists = false;
         if (!userDb) {
-            return false
-        } else(userDb.forEach(function (user) {
-            return user.username != this.username ? true : false
-        }))
+            return false;
+        } else {
+            userDb.forEach(user => {
+                if (user.email === this.email) {
+                    userExists = true
+                }
+            })
+        }
+        return userExists;
     }
+
 }

@@ -75,7 +75,7 @@ function addLoadingMessage() {
 
 function charactersFound() {
   let loadingMessage = document.querySelector('#loadingResults');
-  noResults.innerHTML= ""
+  noResults.innerHTML = ""
   loadingMessage.innerHTML = "Selecciona tu personaje";
 }
 
@@ -192,25 +192,25 @@ function populateCharacterInfo(characterId, membershipType) {
       case 0:
         guardianClass = "Titán";
         break;
-        case 1:
-          guardianClass = "Cazador";
-          break;
-          case 2:
-            guardianClass = "Hechicero";
-            break;
-          }
-          switch (characterId.raceType) {
-            case 0:
-              race = "humano";
-              break;
-              case 1:
-                race = "insomne";
-                break;
-                case 2:
-                  race = "exo";
-                  break;
-                }
-                //log// console.log("Termina nueva población")
+      case 1:
+        guardianClass = "Cazador";
+        break;
+      case 2:
+        guardianClass = "Hechicero";
+        break;
+    }
+    switch (characterId.raceType) {
+      case 0:
+        race = "humano";
+        break;
+      case 1:
+        race = "insomne";
+        break;
+      case 2:
+        race = "exo";
+        break;
+    }
+    //log// console.log("Termina nueva población")
     characterLi.setAttribute("id", `${characterId.characterId}`)
     characterLi.setAttribute("class", "characterPill")
     characterLi.style.backgroundImage = characterEmblem;

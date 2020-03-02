@@ -52,14 +52,15 @@
     <section id="content" class="container-fluid">
         <div id="status" class="row py-2 justify-content-center">
             <h2 class="text-center">Accede a tu cuenta personal</h2>
+            <ul id="error-list"></ul>
         </div>
         <div class="row justify-content-center">
             <div class="col-lg-4 col-sm-12 py-4 forms">
                 <div>
-                    <label for="username-input" class="text-light pl-2">Nombre de usuario:</label><br>
+                    <label for="email-input" class="text-light pl-2">Email registrado:</label><br>
                     <div class="input-field">
-                        <i class="fas fa-user text-light"></i>
-                        <input id="username-input" type="text" placeholder="p.ej. DattoWatto">
+                        <i class="fas fa-envelope-open text-light"></i>
+                        <input id="email-field" type="email" placeholder="p.ej. DattoWatto@bungie.net">
                     </div>
                 </div>
 
@@ -67,7 +68,7 @@
                     <label for="password-input" class="text-light pl-2 pt-2">Contraseña:</label><br>
                     <div class="input-field">
                         <i class="fas fa-key text-light"></i>
-                        <input id="password-input" type="password" placeholder="Contraseña">
+                        <input id="password-field" type="password" placeholder="Contraseña">
 
                     </div>
                 </div>
@@ -93,6 +94,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     </script>
+    <script src="/js/validator.js"></script>
     <script src="/js/login.js"></script>
     </body>
     </html>

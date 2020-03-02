@@ -3,29 +3,28 @@ const searchPlaystation = document.getElementById("platform-playstation")
 const searchXbox = document.getElementById("platform-xbox")
 const searchInput = document.getElementById("username-input")
 
-
-const name= document.getElementById("name-input")
-const username= document.getElementById("username-input")
-const password= document.getElementById("password-input")
-const passwordCheck= document.getElementById("password-check")
-const email= document.getElementById("email-input")
-
-
+const password= document.getElementById("password-field")
+const email= document.getElementById("email-field")
 const loginButton = document.getElementById("login-button")
+
+let errorList=document.getElementById("error-list")
+let userDb = JSON.parse(localStorage.getItem('users'))
 
 loginButton.onclick = () => {
     event.preventDefault()
     deleteErrors();
-    if (isUserRegistered()===true) {}
+    if (isUserRegistered(password.value, email.value)===true) {
+        console.log("yaaahooo")
+    }
 }
 
 function isUserRegistered(){
     
-    let LoginValidator = new loginValidator(username, password)
+    let LoginValidator = new loginValidator(password.value, email.value)
     let userDb = JSON.parse(localStorage.getItem("users"));
     let validUser = true;
 
-    if(!LoginValidator.checkName()){
+    if(!LoginValidator.isTheUserInTheDb()){
         LoginValidator.errorCreator("Este usuario no está registrado en la plataforma. Por favor, regístrate.")
         validUser=false
     }
