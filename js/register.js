@@ -11,6 +11,8 @@ let email= document.getElementById("email-field")
 
 let errorList=document.getElementById("error-list")
 let userDb = JSON.parse(localStorage.getItem('users'))
+const form = document.getElementById("form")
+const statusMessage = document.getElementById("status-message")
 
 
 const registerButton = document.getElementById("register-button")
@@ -20,8 +22,20 @@ registerButton.onclick = () => {
     event.preventDefault()
     deleteErrors();
     if (isUserValid()) {
-        createNewUser(name.value, username.value, password.value, email.value)}
+        createNewUser(name.value, username.value, password.value, email.value)
+        welcomeMessage()
+    }
 }
+
+function welcomeMessage() {
+    statusMessage.innerHTML = "Bienvenido a Destiny 2 Tracker"
+    let welcomeMessage = document.createElement("h5")
+    welcomeMessage.setAttribute("class", "text-center font-weight-bold mt-4")
+    welcomeMessage.innerHTML = "Ya puedes buscar tus personajes de Destiny 2"
+    form.innerText = ""
+    form.appendChild(welcomeMessage)
+}
+
 
 function isUserValid(){
     
@@ -65,7 +79,7 @@ function isUserValid(){
 
 function createNewUser (name, username, password, email) {
     const newUser = new User (name, username, password, email)
-    userDb? userDd.push(newUser) :  userDb = [newUser]
+    userDb? userDb.push(newUser) :  userDb = [newUser]
     localStorage.setItem('users', JSON.stringify(userDb));
 } 
 
