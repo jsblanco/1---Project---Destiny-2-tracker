@@ -230,45 +230,6 @@ function populateCharacterInfo(characterId, membershipType) {
 
 
 
-/* 
-
-Fetches preparados para el futuro:
-
-//Consigue el equipo del personaje. Está codificado; necesitas una llamada a la API con Equipment[i].itemInstanceId (es un ¡¡¡¡array!!!! de objetos)
-
-function getEquipmentInfo() {
-    fetch(`https://www.bungie.net/Platform/Destiny2/${membershipId.membershipType}/Profile/${membershipId.membershipId}/Character/${characterId}/?components=205`,  {
-      headers: {
-        "X-API-Key": apiKey
-      }
-    })
-    .then(response => response.json())
-    .then(data => data.Response.equipment.data.items)
-    .then (equipment => console.log(equipment))
-}
-
-
-
-//Sacamos los itemHash de la función anterior y los buscamos en el jSON que obtenemos con la siguiente, que nos indica, en castellano, todos los detalles del arma
-
-  fetch(`https://www.bungie.net/common/destiny2_content/json/es/DestinyInventoryBucketDefinition-2fbe1829-dfcd-44ec-84d3-bb04a3777dc1.json`, {
-
-
-
-function getItemManifest(){
-  fetch(`https://www.bungie.net/common/destiny2_content/json/es/DestinyInventoryItemLiteDefinition-2fbe1829-dfcd-44ec-84d3-bb04a3777dc1.json`, {
-      headers: {
-        "X-API-Key": apiKey
-      }
-    })
-    .then(response => response.json())
-    .then(response => let itemManifest = response)
-}
-
-
-*/
-
-
 /*
 //Si alguna vez necesito consultar el Manifest global, lo tengo aquí:
 

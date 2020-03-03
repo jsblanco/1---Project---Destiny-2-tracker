@@ -60,35 +60,6 @@ a{
 
 
 
-.navbar{
-    background-color: rgba(50,50,50,.9);
-}
-
-.input-field{
-    background-color: rgba(150,150,150,.6);
-    display: flex;
-    justify-content: space-between
-}
-
-.input-field:hover{
-    background-color: rgba(150,150,150,.9);
-}
-
-.input-field i {
-    width: 20px;
-    height: 20px;
-    margin: 1rem;
-}
-
-
-
-.faq{
-    background-color: rgba(150,150,150,.2);
-    display: flex;
-    justify-content: space-between;
-    border-radius: 25px;
-}
-
 
 
 #status{
@@ -97,8 +68,8 @@ a{
 }
 
 #steam-results {
-    padding: 10px 0;
-    margin: 0 0 10px
+padding: 10px 0;
+margin: 0 0 10px
 }
 
 #login-button:hover {
@@ -113,9 +84,15 @@ a{
     background-color: grey;
 }
 
-.destiny-logo{
-    width: 40px;
-    height: 45px;
+.btn{
+    height: 52px;
+    border-radius: 0;
+    text-decoration: none !important;
+    
+}
+
+.btn:hover {
+    font-weight: bold;
 }
 
 .characterPill{
@@ -137,15 +114,83 @@ a{
     font-size: 0.85em;
     background-color: rgba(0, 0, 0, 0.2);      
 }
-.btn{
-    height: 52px;
-    border-radius: 0;
-    text-decoration: none !important;
-    
+
+.destiny-logo{
+    width: 40px;
+    height: 45px;
 }
 
-.btn:hover {
-    font-weight: bold;
+
+.faq{
+    background-color: rgba(150,150,150,.2);
+    display: flex;
+    justify-content: space-between;
+    border-radius: 25px;
+}
+
+
+.forms{
+    background-color: rgba(50,50,50,.9);
+    border-radius: 10px;
+    width: 100%;
+    padding: 20px;
+    margin-top: 50px;
+}
+
+.input-field{
+    background-color: rgba(150,150,150,.6);
+    display: flex;
+    justify-content: space-between
+}
+
+.input-field:hover{
+    background-color: rgba(150,150,150,.9);
+}
+
+.item-data{
+    padding-left: 10px;;
+    width: 200px !important;
+}
+
+.item-icon{
+    margin: 0px 10px 20px 30px;
+    padding: 0px;
+    border: 2px solid yellow;
+    width: 120px;
+}
+
+.input-field i {
+    width: 20px;
+    height: 20px;
+    margin: 1rem;
+}
+
+.itemHeader {
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 2px 0;
+    text-align: center;
+    border-radius: 20px;
+    width: 380px !important;
+    font-size: 0.8em;
+    color: aliceblue;
+    list-style: none;
+}
+
+.item-level{
+    font-size: 5em;
+    margin: 0 0 20px;
+}
+
+.item-name{
+    font-size: 2em;
+}
+
+.light-level-header{
+    line-height: 4em;
+}
+
+.navbar{
+    background-color: rgba(50,50,50,.9);
 }
 
 .userHeader {
@@ -159,13 +204,6 @@ a{
     list-style: none;
 }
 
-.forms{
-    background-color: rgba(50,50,50,.9);
-    border-radius: 10px;
-    width: 100%;
-    padding: 20px;
-    margin-top: 50px;
-}
 
 
 @media only screen and (min-width: 1578px) {
