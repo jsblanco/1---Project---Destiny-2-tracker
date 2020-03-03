@@ -1,6 +1,6 @@
 body {
     font-family: Gill Sans / Gill Sans MT, sans-serif;
-    background-image: url(/img/wallpaper2.jpg);
+    background-image: url(../img/wallpaper2.jpg);
     background-size: 300vh; 
     background-position: center top;
     color: azure;
