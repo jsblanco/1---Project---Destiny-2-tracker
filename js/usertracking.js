@@ -21,24 +21,15 @@ function updateNavbar() {
     userNavbar.classList.remove("d-none")
 }
 
-function checkUsername(email){
-    let user= localStorage.getItem("email", email)
-    localStorage.setItem("loggedUser", user.username)
-}
-
-
-
-/*
-let userExists = false;
-if (!userDb) {
-    return false;
-} else {
+function successfullLogin(email){ 
     userDb.forEach(user => {
-        if (user.email === this.email) {
-            return user
+        if (user.email === email) {
+            localStorage.setItem("loggedUser", user.username)
         }
     })
 }
-return userExists;
 
-}*/
+
+userNavbar.onclick = () => logOff()
+
+checkLoggedUser()

@@ -1,6 +1,6 @@
 body {
     font-family: Gill Sans / Gill Sans MT, sans-serif;
-    background-image: url(/img/wallpaper2.jpg);
+    background-image: url(../img/wallpaper2.jpg);
     background-size: 300vh; 
     background-position: center top;
     color: azure;
@@ -47,6 +47,12 @@ footer{
     margin-top: 20px;
 }
 
+a{
+    text-decoration: none !important;
+}
+
+
+
 .navbar{
     background-color: rgba(50,50,50,.9);
 }
@@ -66,6 +72,17 @@ footer{
     height: 20px;
     margin: 1rem;
 }
+
+
+
+.faq{
+    background-color: rgba(150,150,150,.2);
+    display: flex;
+    justify-content: space-between;
+    border-radius: 25px;
+}
+
+
 
 #status{
     background-color: rgba(50,50,50,.9);

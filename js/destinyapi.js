@@ -9,7 +9,8 @@
 //Destiny item manifest lite:
 //'/common/destiny2_content/json/es/DestinyInventoryItemLiteDefinition-2fbe1829-dfcd-44ec-84d3-bb04a3777dc1.json',
 
-My membershipId: 4611686018467782694
+var membershipId = "4611686018467782694"
+var characterId = "2305843009299217882"
 Steam membershipType: 3
 */
 
@@ -23,8 +24,7 @@ const resultsList = document.getElementById("steam-results")
 const queryStatus = document.getElementById("status")
 
 //Revisa si hay un usuario dado de alta
-checkLoggedUser()
-userNavbar.onclick = () => logOff()
+
 
 
 searchSteam.onclick = () => {
@@ -234,7 +234,7 @@ function populateCharacterInfo(characterId, membershipType) {
 
 Fetches preparados para el futuro:
 
-//Consigue el equipo del personaje. Está codificado; necesitas una llamada a la API con Equipment[i].itemInstanceId (es un array de objetos)
+//Consigue el equipo del personaje. Está codificado; necesitas una llamada a la API con Equipment[i].itemInstanceId (es un ¡¡¡¡array!!!! de objetos)
 
 function getEquipmentInfo() {
     fetch(`https://www.bungie.net/Platform/Destiny2/${membershipId.membershipType}/Profile/${membershipId.membershipId}/Character/${characterId}/?components=205`,  {
@@ -282,37 +282,5 @@ fetch(`https://www.bungie.net/platform/Destiny2/Manifest/`, {
     .then (json => console.log(json.Response))
 }
 getManifest()
-
-*/
-
-/*Consultar con los TAs: ¿Por qué me dice que usernameFetch() no es una función?
-
-
-function usernameFetch(){
-let user = searchInput.value
-queryStatus.innerHTML=""
-resultsList.innerHTML = ""
-addLoadingMessage()
-fetch(`https://www.bungie.net/Platform/User/SearchUsers/?q=${user}`, {
-    headers: {
-      "X-API-Key": apiKey
-    }
-  })
-  .then(response => response.json())
-  .then(json => json.Response)
-}
-
-
-function steamDisplayNameQuery() {
-  new Promise (usernameFetch())
-  .then(function (players) {
-    return players.filter(function (player) {
-    return (player.steamDisplayName);
-        }
-      )
-    }
-  )
-  .then ((steamPlayers) => membershipByPlatform(steamPlayers, 3))
-}
 
 */
