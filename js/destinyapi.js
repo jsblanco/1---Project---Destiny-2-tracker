@@ -24,7 +24,6 @@ const queryStatus = document.getElementById("status")
 
 //Revisa si hay un usuario dado de alta
 
-checkLoggedUser()
 
 
 searchSteam.onclick = () => {

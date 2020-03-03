@@ -24,20 +24,20 @@
             </div>
             <div class="input-field col-xl-4 col-lg-3 col-sm-12 ">
                 <i class="fas fa-search text-light"></i>
-                <input id="search-input" type="text" placeholder="Indica tu usuario de Destiny 2">
+                <input id="search-input" type="text" placeholder="Indica tu usuario de Destiny 2" autofocus>
             </div>
                 <button id="platform-steam" class="btn btn-dark col-lg-1 col-sm-4"><i class="fab fa-steam mr-2"></i> Steam </button>
                 <button id="platform-playstation" class="btn btn-info col-lg-1 col-sm-4"><i class="fab fa-playstation mr-2"></i> PlayStation </button>
                 <button id="platform-xbox" class="btn btn-success col-lg-1 col-sm-4"><i class="fab fa-xbox mr-2"></i> XBox </button>
   
-            <div class="col-lg-6">
-                <div class="collapse navbar-collapse pl-5" id="nav">
+            <div class="col-lg-5">
+                <div class="collapse navbar-collapse pl-2" id="nav">
                     <ul class="navbar-nav">
                         <li class="nav-item"><a class="nav-link px3 text-light font-weight-bold" href="index.html">Home</a></li>
                         <li id="nav-login" class="nav-item"><a class="nav-link px3 text-light" href="login.html">Login</a></li>
                         <li id="nav-register"  class="nav-item"><a class="nav-link px3 text-light" href="register.html">Registro</a></li>
                         <li class="nav-item"><a  id="nav-username" class="nav-link px3 text-light d-none" href="index.html">Usuario</a></li>
-                        <li class="nav-item"><a class="nav-link px3 text-light" href="#">FAQ</a></li>
+                        <li class="nav-item"><a class="nav-link px3 text-light" href="faq.html">FAQ</a></li>
                     </ul>
                 </div>
             </div>
@@ -46,7 +46,12 @@
 
 
     <section id= "content" class="container-fluid">
-        <div id="status" class="row text-center py-2"></div>
+        <div id="status" class="row text-center py-2">
+            <div class="col text-center">
+                <h2  id = "status-message" class="text-center">Bienvenido a Destiny 2 tracker</h2>
+                <p>Usa la barra de búsqueda para acceder a tus personajes de Destiny 2 estés donde estés</p>
+            </div>
+        </div>
         <center>
             <div id="steam-results" class="row my-2 justify-content-center"></div>
         </center>

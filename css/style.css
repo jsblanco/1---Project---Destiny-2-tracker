@@ -73,6 +73,17 @@ a{
     margin: 1rem;
 }
 
+
+
+.faq{
+    background-color: rgba(150,150,150,.2);
+    display: flex;
+    justify-content: space-between;
+    border-radius: 25px;
+}
+
+
+
 #status{
     background-color: rgba(50,50,50,.9);
     

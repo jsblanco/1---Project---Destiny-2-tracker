@@ -24,11 +24,7 @@ function updateNavbar() {
 function successfullLogin(email){ 
     userDb.forEach(user => {
         if (user.email === email) {
-            console.log(email)
-            console.log(user.email)
-            console.log(user.username)
             localStorage.setItem("loggedUser", user.username)
-            updateNavbar()
         }
     })
 }
@@ -36,3 +32,4 @@ function successfullLogin(email){
 
 userNavbar.onclick = () => logOff()
 
+checkLoggedUser()

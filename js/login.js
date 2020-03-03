@@ -18,6 +18,7 @@ loginButton.onclick = () => {
     if (isUserRegistered(password.value, email.value) === true) {
         welcomeMessage()
         successfullLogin(email.value)
+        checkLoggedUser()
     }
 }
 
