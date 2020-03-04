@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
             integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
@@ -15,9 +15,9 @@
         <nav class="navbar navbar-expand-lg navbar-light fixed-top d-flex justify-content-between pt-2  pb-1">
             <div class="col-xl-3 col-lg-3 col-sm-12 text-center">
                 <div class="row py-4">
-                    <button type="button" class="navbar-toggler bg-light m-2" data-toggle="collapse"
-                    data-target="#nav"><span class="fas fa-bars"></span></button>
-                    <img src="./img/destiny-icon.png" class="navbar-brand destiny-logo"></img>   
+                    <button type="button" class="navbar-toggler" data-toggle="collapse"
+                    data-target="#nav">
+                    <img src="./img/destiny-icon.png" class="navbar-brand destiny-logo"></img> </button>  
                    <a href="index.html"><h1 class="font-weight-bold pt-2 pl-2 text-white">Destiny 2 tracker</h1></a> 
                 </div>
             </div>
@@ -51,7 +51,150 @@
             </div>
         </div>
         <center>
-            <div id="steam-results" class="row my-2 justify-content-center"></div>
+            <div id="steam-results" class="row my-2 d-flex align-content-center"></div>
+
+            <div id="myModal" class="modal">
+                <div class= "row m-5">
+                    <i class="close fas fa-times-circle"></i>
+                </div>
+                <center>
+                    <div class="row my-1 justify-content-center">
+                        <div class=" col-xl-6 col-lg-8 col-md-10 m-2 character-header">
+                            <div class="row justify-content-center align-items-center">
+                                <img id="character-emblem" class="my-3 border border-secondary" src="">
+                                <p id="character-data" class="col-lg-5 "></p>
+                                <img id="subclass-icon" src="">
+                                <p id="subclass" class="col-lg-2 font-weight-bold"></p>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div class="row my-1 justify-content-center">
+        
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-xs-8 px-0">
+                            <div class="itemHeader my-4">
+                                <p class="font-weight-bold item-name pt-2 mb-0">Nombre del item</p>
+                                <p class=" font-italic  mb-2 px-2 item-description">Leyenda leyenda leyenda </p>
+                                <div class="row justify-content-center">
+                                    <img class="col-lg-3 col-xs-3 item-icon border" src="">
+                                    <div class="col-lg-7 col-xs-9 item-data"></b>
+                                        <p class="my-0 pb-0 light-level-header">Nivel de luz: <br><b
+                                                class="my-0 p-0 font-weight-bold text-warning item-level">750</b></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="itemHeader my-4">
+                                <p class="font-weight-bold item-name pt-2 mb-0">Nombre del item</p>
+                                <p class=" font-italic  mb-2 px-2 item-description">Leyenda leyenda leyenda </p>
+                                <div class="row justify-content-center">
+                                    <img class="col-lg-3 col-xs-3 item-icon border" src="">
+                                    <div class="col-lg-7 col-xs-9 item-data"></b>
+                                        <p class="my-0 pb-0 light-level-header">Nivel de luz: <br><b
+                                                class="my-0 p-0 font-weight-bold text-warning item-level">750</b></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="itemHeader my-4">
+                                <p class="font-weight-bold item-name pt-2 mb-0">Nombre del item</p>
+                                <p class=" font-italic  mb-2 px-2 item-description">Leyenda leyenda leyenda </p>
+                                <div class="row justify-content-center">
+                                    <img class="col-lg-3 col-xs-3 item-icon border" src="">
+                                    <div class="col-lg-7 col-xs-9 item-data"></b>
+                                        <p class="my-0 pb-0 light-level-header">Nivel de luz: <br><b
+                                                class="my-0 p-0 font-weight-bold text-warning item-level">750</b></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="itemHeader my-4">
+                                <p class="font-weight-bold ghost-name pt-2 mb-0">Nombre del espectro</p>
+                                <p class=" font-italic  mb-2 px-2 ghost-description">Leyenda leyenda leyenda </p>
+                                <div class="row justify-content-center">
+                                    <img class="col-lg-3 col-xs-3 ghost-icon border" src="">
+                                    <div class="col-lg-7 col-xs-9 item-data"></b>
+                                        <p class="my-0 pb-0 ghost-data-header"> <br><b
+                                                class="my-0 p-0 font-weight-bold text-warning ghost-level"></b></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="itemHeader my-4">
+                                <p class="font-weight-bold sparrow-name pt-2 mb-0">Nombre del sparrow</p>
+                                <p class=" font-italic  mb-2 px-2 sparrow-description">Leyenda leyenda leyenda </p>
+                                <div class="row justify-content-center">
+                                    <img class="col-lg-3 col-xs-3 sparrow-icon border" src="">
+                                    <div class="col-lg-7 col-xs-9 item-data"></b>
+                                        <p class="my-0 pb-0 light-level-header">Velocidad: <br><b
+                                                class="my-0 p-0 font-weight-bold text-warning sparrow-speed">750</b></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-xs-8 d-none d-lg-block px-0">
+                            <img id="guardian-image" class="behind guardian" src="">
+                        </div>
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-xs-8 px-0">
+                            <div class="itemHeader my-4">
+                                <p class="font-weight-bold item-name pt-2 mb-0">Nombre del item</p>
+                                <p class=" font-italic  mb-2 px-2 item-description">Leyenda leyenda leyenda </p>
+                                <div class="row justify-content-center">
+                                    <img class="col-lg-3 col-xs-3 item-icon border" src="">
+                                    <div class="col-lg-7 col-xs-9 item-data"></b>
+                                        <p class="my-0 pb-0 light-level-header">Nivel de luz: <br><b
+                                                class="my-0 p-0 font-weight-bold text-warning item-level">750</b></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="itemHeader my-4">
+                                <p class="font-weight-bold item-name pt-2 mb-0">Nombre del item</p>
+                                <p class=" font-italic  mb-2 px-2 item-description">Leyenda leyenda leyenda </p>
+                                <div class="row justify-content-center">
+                                    <img class="col-lg-3 col-xs-3 item-icon border" src="">
+                                    <div class="col-lg-7 col-xs-9 item-data"></b>
+                                        <p class="my-0 pb-0 light-level-header">Nivel de luz: <br><b
+                                                class="my-0 p-0 font-weight-bold text-warning item-level">750</b></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="itemHeader my-4">
+                                <p class="font-weight-bold item-name pt-2 mb-0">Nombre del item</p>
+                                <p class=" font-italic  mb-2 px-2 item-description">Leyenda leyenda leyenda </p>
+                                <div class="row justify-content-center">
+                                    <img class="col-lg-3 col-xs-3 item-icon border" src="">
+                                    <div class="col-lg-7 col-xs-9 item-data"></b>
+                                        <p class="my-0 pb-0 light-level-header">Nivel de luz: <br><b
+                                                class="my-0 p-0 font-weight-bold text-warning item-level">750</b></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="itemHeader my-4">
+                                <p class="font-weight-bold item-name pt-2 mb-0">Nombre del item</p>
+                                <p class=" font-italic  mb-2 px-2 item-description">Leyenda leyenda leyenda </p>
+                                <div class="row justify-content-center">
+                                    <img class="col-lg-3 col-xs-3 item-icon border" src="">
+                                    <div class="col-lg-7 col-xs-9 item-data"></b>
+                                        <p class="my-0 pb-0 light-level-header">Nivel de luz: <br><b
+                                                class="my-0 p-0 font-weight-bold text-warning item-level">750</b></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="itemHeader my-4">
+                                <p class="font-weight-bold item-name pt-2 mb-0">Nombre del item</p>
+                                <p class=" font-italic  mb-2 px-2 item-description">Leyenda leyenda leyenda </p>
+                                <div class="row justify-content-center">
+                                    <img class="col-lg-3 col-xs-3 item-icon border" src="">
+                                    <div class="col-lg-7 col-xs-9 item-data"></b>
+                                        <p class="my-0 pb-0 light-level-header">Nivel de luz: <br><b
+                                                class="my-0 p-0 font-weight-bold text-warning item-level">990</b></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </center>
+                </div>
+              
+              </div>
+
+
         </center>
     </section>
     <div class="py-5"></div>
@@ -68,6 +211,8 @@ integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0
 integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
 </script>
 <script src="./js/istherealoggeduser.js"></script>
+<script src="./js/manifest.js"></script>
 <script src="./js/destinyapi.js"></script>
+<script src="./js/inventory.js"></script>
 </body>
 </html>

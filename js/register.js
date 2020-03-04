@@ -1,7 +1,7 @@
 const searchSteam = document.getElementById("platform-steam")
 const searchPlaystation = document.getElementById("platform-playstation")
 const searchXbox = document.getElementById("platform-xbox")
-const searchInput = document.getElementById("username-field")
+//const searchInput = document.getElementById("username-field")
 const navBar = document.getElementById("navbar-nav")
 
 

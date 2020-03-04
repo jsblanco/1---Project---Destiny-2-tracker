@@ -22,6 +22,11 @@ const searchXbox = document.getElementById("platform-xbox")
 //const searchInput = document.getElementById("search-input")
 const resultsList = document.getElementById("steam-results")
 const queryStatus = document.getElementById("status")
+const modal = document.getElementById("myModal");
+const span = document.getElementsByClassName("close")[0];
+let membershipType
+let membershipId
+let characterId 
 
 //Revisa si hay un usuario dado de alta
 
@@ -89,7 +94,7 @@ function charactersFound() {
 //El parámetro membershipType lo iremos pasando desde el inicio hasta la última función, que es donde se usará finalmente.
 
 function displayNameQuery(membershipType) {
-  //log// console.log("Empieza displayNameQuery")
+  console.log("Empieza displayNameQuery")
   let user = localStorage.userInput
   queryStatus.innerHTML = ""
   addLoadingMessage()
@@ -108,7 +113,7 @@ function displayNameQuery(membershipType) {
 //Tenemos que meter steamPlayers.membershipId
 
 function membershipByPlatform(steamPlayers, membershipType) {
-  //log//  console.log("Empieza Membership ID")
+   console.log("Empieza Membership ID")
   let searchQuery = searchInput.value
   console.log(searchQuery)
   localStorage.removeItem("userInput")
@@ -127,7 +132,7 @@ function membershipByPlatform(steamPlayers, membershipType) {
 
 //Nos muestra la pantalla de inicio. Ahora mismo bebe de Membership Id
 function populateResults(json, membershipType) {
-  //log//  console.log("Añadiendo usuarios")
+   console.log("Añadiendo usuarios")
   for (let i = 0; i < json.length; i++) {
     let newResult = document.createElement("ul")
     newResult.setAttribute("id", `${json[i].membershipId}`)
@@ -146,7 +151,7 @@ function populateResults(json, membershipType) {
 //Nos hace una llamada por cada personaje del usuario a una nueva función, que extrae sus datos
 
 function getPlayerCharacters(membershipId, membershipType) {
-  //log// console.log("Empieza getPlayerCharacters")
+  console.log("Empieza getPlayerCharacters")
   fetch(`https://www.bungie.net/Platform/Destiny2/${membershipId.membershipType}//Profile/${membershipId.membershipId}/?components=200`, {
       headers: {
         "X-API-Key": apiKey
@@ -164,7 +169,7 @@ function getPlayerCharacters(membershipId, membershipType) {
       }
     })
 }
-//log// console.log("Termina getPlayerCharacters")
+console.log("Termina getPlayerCharacters")
 
 //Esta función recibe el ID de cada personaje de la función anterior, y extrae todos los datos
 
@@ -182,7 +187,7 @@ function getCharacterInfo(membershipId, characterId, membershipType) {
 //Coloca cada personaje bajo su cuenta de usuario usando el nº de usuario, que en populateResults añadimos como Id de cada Ul
 
 function populateCharacterInfo(characterId, membershipType) {
-  //log//  console.log(`Añadiendo personajes para ${characterId.membershipId}`)
+   console.log(`Añadiendo personajes para ${characterId.membershipId}`)
   if (characterId.membershipType === membershipType) {
     let userUl = document.getElementById(characterId.membershipId)
     let characterP = document.createElement("p")
@@ -214,7 +219,7 @@ function populateCharacterInfo(characterId, membershipType) {
         race = "exo";
         break;
     }
-    //log// console.log("Termina nueva población")
+    console.log("Termina nueva población")
     characterLi.setAttribute("id", `${characterId.characterId}`)
     characterLi.setAttribute("class", "characterPill")
     characterLi.style.backgroundImage = characterEmblem;
@@ -231,10 +236,24 @@ function populateCharacterInfo(characterId, membershipType) {
 function linkToInventory(characterLi, membershipType, membershipId, characterId){
 
   characterLi.onclick =()=>{
-    localStorage.setItem("membershipType", membershipType)
-    localStorage.setItem("membershipId", membershipId)
-    localStorage.setItem("characterId", characterId)
-    window.location.href="inventory.html"
+    membershipType = membershipType
+    membershipId = membershipId
+    characterId = characterId
+    getCharacterInformation(membershipId, characterId, membershipType)
+    getEquipmentInfo(membershipType, membershipId, characterId)
+    modal.style.display = "block";
+  }
+}
+
+
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
   }
 }
 
