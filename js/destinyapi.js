@@ -230,10 +230,16 @@ function populateCharacterInfo(characterId, membershipType) {
 }
 
 function linkToInventory(characterLi, membershipType, membershipId, characterId){
-  localStorage.setItem("membershipType", membershipType)
-  localStorage.setItem("membershipId", membershipId)
-  localStorage.setItem("characterId", characterId)
-  characterLi.onclick =()=>window.location.href="inventory.html"
+
+  characterLi.onclick =()=>{
+    localStorage.removeItem("membershipType")
+    localStorage.removeItem("membershipId")
+    localStorage.removeItem("characterId")
+    localStorage.setItem("membershipType", membershipType)
+    localStorage.setItem("membershipId", membershipId)
+    localStorage.setItem("characterId", characterId)
+    window.location.href="inventory.html"
+  }
 }
 
 

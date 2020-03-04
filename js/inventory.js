@@ -1,18 +1,18 @@
 var apiKey = "dd6e865e28924fad9ea265dfae890e35";
-let membershipType = localStorage.membershipType
-var membershipId = localStorage.membershipId
-var characterId = localStorage.characterId
-let itemIcon = document.getElementsByClassName("item-icon")
-let itemName = document.getElementsByClassName("item-name")
-let itemDescription = document.getElementsByClassName("item-description")
-let itemLevel = document.getElementsByClassName("item-level")
-let ghostIcon = document.getElementsByClassName("ghost-icon")
-let ghostName = document.getElementsByClassName("ghost-name")
-let ghostDescription = document.getElementsByClassName("ghost-description")
-let sparrowIcon = document.getElementsByClassName("sparrow-icon")
-let sparrowName = document.getElementsByClassName("sparrow-name")
-let sparrowDescription = document.getElementsByClassName("sparrow-description")
-let sparrowSpeed = document.getElementsByClassName("sparrow-speed")
+const itemIcon = document.getElementsByClassName("item-icon")
+const itemName = document.getElementsByClassName("item-name")
+const itemDescription = document.getElementsByClassName("item-description")
+const itemLevel = document.getElementsByClassName("item-level")
+const ghostIcon = document.getElementsByClassName("ghost-icon")
+const ghostName = document.getElementsByClassName("ghost-name")
+const ghostDescription = document.getElementsByClassName("ghost-description")
+const sparrowIcon = document.getElementsByClassName("sparrow-icon")
+const sparrowName = document.getElementsByClassName("sparrow-name")
+const sparrowDescription = document.getElementsByClassName("sparrow-description")
+const sparrowSpeed = document.getElementsByClassName("sparrow-speed")
+const membershipType = localStorage.membershipType
+const membershipId = localStorage.membershipId
+const characterId = localStorage.characterId
 
 
  //= JSON.parse(./manifest.json)
@@ -37,6 +37,7 @@ getItemManifest()
 //Una vez tengo el manifest llamo a getEquipmentInfo con los datos que saqué del personaje
 
 function getEquipmentInfo() {
+
     console.log("Comienza getEquipmentInfo")
     let counter = 0
     fetch(`https://www.bungie.net/Platform/Destiny2/${membershipType}/Profile/${membershipId}/Character/${characterId}/?components=205`, {
@@ -57,6 +58,8 @@ function getEquipmentInfo() {
             } else if (counter === 9){
                 populateSparrow(item);
                 counter++;
+            } else if (counter === 11){
+                //Aquí poblaré la clase
             }})
             }) 
         .then (()=> console.log("Termina getEquipmentInfo"))
@@ -75,9 +78,15 @@ function getEquipmentInfo() {
                 }
             })
             .then(response => response.json())
-            .then(data => itemLevel[counter].innerHTML= (data.Response.instance.data.primaryStat.value))
+            .then(function (data) {
+                itemLevel[counter].innerHTML= (data.Response.instance.data.primaryStat.value)
+                if (data.Response.instance.data.quality===10) {
+                    itemIcon[counter].classList.add("border-warning")
+                 } else {
+                    itemIcon[counter].classList.add("border-secondary")
+                }
+            })
     }
-    
 
 
     function populateGhost(item){

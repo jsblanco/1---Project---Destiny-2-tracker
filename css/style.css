@@ -155,7 +155,7 @@ margin: 0 0 10px
 .item-icon, .ghost-icon, .sparrow-icon{
     margin: 10px 10px 20px 10px;
     padding: 0px;
-    border: 2px solid yellow;
+    border-width: 2px !important;
     width: 120px;
 }
 
