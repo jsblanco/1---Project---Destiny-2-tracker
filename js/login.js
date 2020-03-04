@@ -1,14 +1,11 @@
 const searchSteam = document.getElementById("platform-steam")
 const searchPlaystation = document.getElementById("platform-playstation")
 const searchXbox = document.getElementById("platform-xbox")
-const searchInput = document.getElementById("username-input")
-
 const password = document.getElementById("password-field")
 const email = document.getElementById("email-field")
 const loginButton = document.getElementById("login-button")
 const form = document.getElementById("form")
 const statusMessage = document.getElementById("status-message")
-
 let errorList = document.getElementById("error-list")
 let userDb = JSON.parse(localStorage.getItem('users'))
 

@@ -19,7 +19,7 @@ var apiKey = "dd6e865e28924fad9ea265dfae890e35";
 const searchSteam = document.getElementById("platform-steam")
 const searchPlaystation = document.getElementById("platform-playstation")
 const searchXbox = document.getElementById("platform-xbox")
-const searchInput = document.getElementById("search-input")
+//const searchInput = document.getElementById("search-input")
 const resultsList = document.getElementById("steam-results")
 const queryStatus = document.getElementById("status")
 
@@ -90,9 +90,8 @@ function charactersFound() {
 
 function displayNameQuery(membershipType) {
   //log// console.log("Empieza displayNameQuery")
-  let user = searchInput.value
+  let user = localStorage.userInput
   queryStatus.innerHTML = ""
-  resultsList.innerHTML = ""
   addLoadingMessage()
   fetch(`https://www.bungie.net/Platform/User/SearchUsers/?q=${user}`, {
       headers: {
@@ -112,6 +111,7 @@ function membershipByPlatform(steamPlayers, membershipType) {
   //log//  console.log("Empieza Membership ID")
   let searchQuery = searchInput.value
   console.log(searchQuery)
+  localStorage.removeItem("userInput")
   steamPlayers.map(function (user) {
     fetch(`https://www.bungie.net/Platform/User/GetMembershipsById/${user.membershipId}/${membershipType}/`, {
         headers: {
@@ -222,11 +222,21 @@ function populateCharacterInfo(characterId, membershipType) {
   <i>${Math.floor(spentTime/60)} horas y ${spentTime%60} minutos jugados.</i>`;
     charactersFound()
     characterLi.appendChild(characterP)
+    linkToInventory(characterLi, membershipType, characterId.membershipId, characterId.characterId)
     userUl.classList.remove("d-none")
     userUl.appendChild(characterLi)
     userUl.appendChild(spentTimeLi)
   }
 }
+
+function linkToInventory(characterLi, membershipType, membershipId, characterId){
+  localStorage.setItem("membershipType", membershipType)
+  localStorage.setItem("membershipId", membershipId)
+  localStorage.setItem("characterId", characterId)
+  characterLi.onclick =()=>window.location.href="inventory.html"
+}
+
+
 
 
 

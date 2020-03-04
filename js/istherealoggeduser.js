@@ -2,6 +2,7 @@ const loginNavbar = document.getElementById("nav-login")
 const registerNavbar = document.getElementById("nav-register")
 const userNavbar = document.getElementById("nav-username")
 const logoffNavbar = document.getElementById("nav-logoff")
+const searchInput = document.getElementById("search-input")
 
 
 function checkLoggedUser(){
@@ -32,4 +33,14 @@ function successfullLogin(email){
 
 userNavbar.onclick = () => logOff()
 
+function storeSearchInput(){
+    localStorage.setItem("userInput", searchInput.value)
+}
+
+searchInput.addEventListener("change", storeSearchInput)
+
+searchInput.value = localStorage.userInput? localStorage.userInput : ""
+
 checkLoggedUser()
+
+

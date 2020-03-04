@@ -1,12 +1,19 @@
 var apiKey = "dd6e865e28924fad9ea265dfae890e35";
-var membershipId = "4611686018467782694"
-var characterId = "2305843009299217882"
-let membershipType = "3"
+let membershipType = localStorage.membershipType
+var membershipId = localStorage.membershipId
+var characterId = localStorage.characterId
 let itemIcon = document.getElementsByClassName("item-icon")
 let itemName = document.getElementsByClassName("item-name")
 let itemDescription = document.getElementsByClassName("item-description")
 let itemLevel = document.getElementsByClassName("item-level")
-let characterEquipment
+let ghostIcon = document.getElementsByClassName("ghost-icon")
+let ghostName = document.getElementsByClassName("ghost-name")
+let ghostDescription = document.getElementsByClassName("ghost-description")
+let sparrowIcon = document.getElementsByClassName("sparrow-icon")
+let sparrowName = document.getElementsByClassName("sparrow-name")
+let sparrowDescription = document.getElementsByClassName("sparrow-description")
+let sparrowSpeed = document.getElementsByClassName("sparrow-speed")
+
 
  //= JSON.parse(./manifest.json)
 /*
@@ -40,10 +47,18 @@ function getEquipmentInfo() {
         .then(response => response.json())
         .then(data => data.Response.equipment.data.items)
         .then(equipment => {equipment.map(function (item) {
+            if (counter < 8){
                 populateItemName(item, counter);
                 getItemInfo(item, counter);
-                counter++
-            })}) 
+                counter++;
+            } else if (counter === 8){
+                populateGhost(item);
+                counter++;
+            } else if (counter === 9){
+                populateSparrow(item);
+                counter++;
+            }})
+            }) 
         .then (()=> console.log("Termina getEquipmentInfo"))
         }
 
@@ -64,6 +79,27 @@ function getEquipmentInfo() {
     }
     
 
+
+    function populateGhost(item){
+        ghostIcon[0].src = `http://www.bungie.net/${manifest[item.itemHash.toString()].displayProperties.icon}`
+        ghostName[0].innerHTML = manifest[item.itemHash.toString()].displayProperties.name
+        ghostDescription[0].innerHTML = manifest[item.itemHash.toString()].displayProperties.description
+    }
+
+
+    function populateSparrow(item){
+        sparrowIcon[0].src = `http://www.bungie.net/${manifest[item.itemHash.toString()].displayProperties.icon}`
+        sparrowName[0].innerHTML = manifest[item.itemHash.toString()].displayProperties.name
+        sparrowDescription[0].innerHTML = manifest[item.itemHash.toString()].displayProperties.description
+
+        fetch(`https://www.bungie.net/Platform/Destiny2/${membershipType}/Profile/${membershipId}/Item/${item.itemInstanceId}/?components=300`, {
+                headers: {
+                    "X-API-Key": apiKey
+                }
+            })
+            .then(response => response.json())
+            .then(data => sparrowSpeed[0].innerHTML= (data.Response.instance.data.primaryStat.value))
+    }
 
 
 
