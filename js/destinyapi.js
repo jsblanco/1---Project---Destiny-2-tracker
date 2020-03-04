@@ -241,6 +241,7 @@ function linkToInventory(characterLi, membershipType, membershipId, characterId)
     characterId = characterId
     getCharacterInformation(membershipId, characterId, membershipType)
     getEquipmentInfo(membershipType, membershipId, characterId)
+    window.scrollTo({ top: 0})
     modal.style.display = "block";
   }
 }
