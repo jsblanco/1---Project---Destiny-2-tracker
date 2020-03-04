@@ -225,16 +225,12 @@ function populateCharacterInfo(characterId, membershipType) {
     linkToInventory(characterLi, membershipType, characterId.membershipId, characterId.characterId)
     userUl.classList.remove("d-none")
     userUl.appendChild(characterLi)
-    userUl.appendChild(spentTimeLi)
   }
 }
 
 function linkToInventory(characterLi, membershipType, membershipId, characterId){
 
   characterLi.onclick =()=>{
-    localStorage.removeItem("membershipType")
-    localStorage.removeItem("membershipId")
-    localStorage.removeItem("characterId")
     localStorage.setItem("membershipType", membershipType)
     localStorage.setItem("membershipId", membershipId)
     localStorage.setItem("characterId", characterId)
