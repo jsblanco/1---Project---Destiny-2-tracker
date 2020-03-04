@@ -19,7 +19,7 @@ var apiKey = "dd6e865e28924fad9ea265dfae890e35";
 const searchSteam = document.getElementById("platform-steam")
 const searchPlaystation = document.getElementById("platform-playstation")
 const searchXbox = document.getElementById("platform-xbox")
-const searchInput = document.getElementById("search-input")
+//const searchInput = document.getElementById("search-input")
 const resultsList = document.getElementById("steam-results")
 const queryStatus = document.getElementById("status")
 
@@ -90,9 +90,8 @@ function charactersFound() {
 
 function displayNameQuery(membershipType) {
   //log// console.log("Empieza displayNameQuery")
-  let user = searchInput.value
+  let user = localStorage.userInput
   queryStatus.innerHTML = ""
-  resultsList.innerHTML = ""
   addLoadingMessage()
   fetch(`https://www.bungie.net/Platform/User/SearchUsers/?q=${user}`, {
       headers: {
@@ -112,6 +111,7 @@ function membershipByPlatform(steamPlayers, membershipType) {
   //log//  console.log("Empieza Membership ID")
   let searchQuery = searchInput.value
   console.log(searchQuery)
+  localStorage.removeItem("userInput")
   steamPlayers.map(function (user) {
     fetch(`https://www.bungie.net/Platform/User/GetMembershipsById/${user.membershipId}/${membershipType}/`, {
         headers: {
@@ -222,51 +222,24 @@ function populateCharacterInfo(characterId, membershipType) {
   <i>${Math.floor(spentTime/60)} horas y ${spentTime%60} minutos jugados.</i>`;
     charactersFound()
     characterLi.appendChild(characterP)
+    linkToInventory(characterLi, membershipType, characterId.membershipId, characterId.characterId)
     userUl.classList.remove("d-none")
     userUl.appendChild(characterLi)
-    userUl.appendChild(spentTimeLi)
+  }
+}
+
+function linkToInventory(characterLi, membershipType, membershipId, characterId){
+
+  characterLi.onclick =()=>{
+    localStorage.setItem("membershipType", membershipType)
+    localStorage.setItem("membershipId", membershipId)
+    localStorage.setItem("characterId", characterId)
+    window.location.href="inventory.html"
   }
 }
 
 
 
-/* 
-
-Fetches preparados para el futuro:
-
-//Consigue el equipo del personaje. Está codificado; necesitas una llamada a la API con Equipment[i].itemInstanceId (es un ¡¡¡¡array!!!! de objetos)
-
-function getEquipmentInfo() {
-    fetch(`https://www.bungie.net/Platform/Destiny2/${membershipId.membershipType}/Profile/${membershipId.membershipId}/Character/${characterId}/?components=205`,  {
-      headers: {
-        "X-API-Key": apiKey
-      }
-    })
-    .then(response => response.json())
-    .then(data => data.Response.equipment.data.items)
-    .then (equipment => console.log(equipment))
-}
-
-
-
-//Sacamos los itemHash de la función anterior y los buscamos en el jSON que obtenemos con la siguiente, que nos indica, en castellano, todos los detalles del arma
-
-  fetch(`https://www.bungie.net/common/destiny2_content/json/es/DestinyInventoryBucketDefinition-2fbe1829-dfcd-44ec-84d3-bb04a3777dc1.json`, {
-
-
-
-function getItemManifest(){
-  fetch(`https://www.bungie.net/common/destiny2_content/json/es/DestinyInventoryItemLiteDefinition-2fbe1829-dfcd-44ec-84d3-bb04a3777dc1.json`, {
-      headers: {
-        "X-API-Key": apiKey
-      }
-    })
-    .then(response => response.json())
-    .then(response => let itemManifest = response)
-}
-
-
-*/
 
 
 /*

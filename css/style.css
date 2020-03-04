@@ -60,36 +60,11 @@ a{
 
 
 
-.navbar{
-    background-color: rgba(50,50,50,.9);
+#character-emblem, #subclass-icon {
+    width: 100px !important;
+    height: 100px !important;
+    border-width: 2px !important;
 }
-
-.input-field{
-    background-color: rgba(150,150,150,.6);
-    display: flex;
-    justify-content: space-between
-}
-
-.input-field:hover{
-    background-color: rgba(150,150,150,.9);
-}
-
-.input-field i {
-    width: 20px;
-    height: 20px;
-    margin: 1rem;
-}
-
-
-
-.faq{
-    background-color: rgba(150,150,150,.2);
-    display: flex;
-    justify-content: space-between;
-    border-radius: 25px;
-}
-
-
 
 #status{
     background-color: rgba(50,50,50,.9);
@@ -113,9 +88,19 @@ a{
     background-color: grey;
 }
 
-.destiny-logo{
-    width: 40px;
-    height: 45px;
+.btn{
+    height: 52px;
+    border-radius: 0;
+    text-decoration: none !important;
+    
+}
+
+.btn:hover {
+    font-weight: bold;
+}
+
+.character-header p{
+    margin-left:0 !important
 }
 
 .characterPill{
@@ -137,27 +122,20 @@ a{
     font-size: 0.85em;
     background-color: rgba(0, 0, 0, 0.2);      
 }
-.btn{
-    height: 52px;
-    border-radius: 0;
-    text-decoration: none !important;
-    
+
+.destiny-logo{
+    width: 40px;
+    height: 45px;
 }
 
-.btn:hover {
-    font-weight: bold;
+
+.faq{
+    background-color: rgba(150,150,150,.2);
+    display: flex;
+    justify-content: space-between;
+    border-radius: 25px;
 }
 
-.userHeader {
-    background-color: rgba(0, 0, 0, 0.8);
-    padding: 8px 0;
-    text-align: center;
-    border-radius: 20px 20px 0 0;
-    width: 300px;
-    font-size: 0.8em;
-    color: aliceblue;
-    list-style: none;
-}
 
 .forms{
     background-color: rgba(50,50,50,.9);
@@ -166,6 +144,81 @@ a{
     padding: 20px;
     margin-top: 50px;
 }
+
+.input-field{
+    background-color: rgba(150,150,150,.6);
+    display: flex;
+    justify-content: space-between
+}
+
+.input-field:hover{
+    background-color: rgba(150,150,150,.9);
+}
+
+.item-data{
+    padding-left: 10px;;
+    width: 200px !important;
+}
+
+.item-icon, .ghost-icon, .sparrow-icon{
+    margin: 10px 10px 20px 10px;
+    padding: 0px;
+    border-width: 2px !important;
+    width: 120px;
+}
+
+.input-field i {
+    width: 20px;
+    height: 20px;
+    margin: 1rem;
+}
+
+.itemHeader, .character-header{
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 2px 0;
+    text-align: center;
+    border-radius: 20px;
+    font-size: 0.8em;
+    color: aliceblue;
+    list-style: none;
+}
+
+.itemHeader {
+    width: 340px !important;
+
+}
+
+.character-header{
+    font-size: 1.3em;
+}
+
+.item-level, .sparrow-speed{
+    font-size: 5em;
+    margin: 0 0 20px;
+}
+
+.light-level-header{
+    line-height: 4em;
+    padding: 0;
+    margin: 0;
+}
+
+.navbar{
+    background-color: rgba(50,50,50,.9);
+}
+
+.userHeader {
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 8px 0;
+    margin: 20px 0 0;
+    text-align: center;
+    border-radius: 20px 20px 0 0;
+    width: 300px;
+    font-size: 0.8em;
+    color: aliceblue;
+    list-style: none;
+}
+
 
 
 @media only screen and (min-width: 1578px) {
