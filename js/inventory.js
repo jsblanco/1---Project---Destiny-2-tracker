@@ -10,9 +10,6 @@ const sparrowIcon = document.getElementsByClassName("sparrow-icon")
 const sparrowName = document.getElementsByClassName("sparrow-name")
 const sparrowDescription = document.getElementsByClassName("sparrow-description")
 const sparrowSpeed = document.getElementsByClassName("sparrow-speed")
-const membershipType = localStorage.membershipType
-const membershipId = localStorage.membershipId
-const characterId = localStorage.characterId
 const characterEmblem = document.getElementById("character-emblem")
 const subclassIcon = document.getElementById("subclass-icon")
 const characterSubclass = document.getElementById("subclass")
@@ -43,7 +40,7 @@ getItemManifest()
 
 */
 
-function getEquipmentInfo() {
+function getEquipmentInfo(membershipType, membershipId, characterId) {
 
     console.log("Comienza getEquipmentInfo")
     let counter = 0
@@ -58,7 +55,7 @@ function getEquipmentInfo() {
             equipment.map(function (item) {
                 if (counter < 8) {
                     populateItemName(item, counter);
-                    getItemInfo(item, counter);
+                    getItemInfo(item, counter, membershipType, membershipId);
                     counter++;
                 } else if (counter === 8) {
                     populateGhost(item);
@@ -84,7 +81,7 @@ function populateItemName(item, counter) {
     itemDescription[counter].innerHTML = manifest[item.itemHash.toString()].displayProperties.description
 }
 
-function getItemInfo(item, counter) {
+function getItemInfo(item, counter, membershipType, membershipId) {
     fetch(`https://www.bungie.net/Platform/Destiny2/${membershipType}/Profile/${membershipId}/Item/${item.itemInstanceId}/?components=300`, {
             headers: {
                 "X-API-Key": apiKey
@@ -123,18 +120,18 @@ function populateSparrow(item) {
         .then(data => sparrowSpeed[0].innerHTML = (data.Response.instance.data.primaryStat.value))
 }
 
-function getCharacterInfo(membershipId, characterId, membershipType) {
+function getCharacterInformation(membershipId, characterId, membershipType) {
     fetch(`https://www.bungie.net/Platform/Destiny2/${membershipType}/Profile/${membershipId}/Character/${characterId}/?components=200`, {
             headers: {
                 "X-API-Key": apiKey
             }
         })
         .then(response => response.json())
-        .then(data => populateCharacterInfo(data.Response.character.data, membershipType))
+        .then(data => populateCharacterInformation(data.Response.character.data, membershipType))
 }
 
 
-function populateCharacterInfo(characterId, membershipType) {
+function populateCharacterInformation(characterId, membershipType) {
     //log//  console.log(`Añadiendo personajes para ${characterId.membershipId}`)
 
 
@@ -183,5 +180,5 @@ function populateGuardianSubclass(item){
 }
 
 
-getCharacterInfo(membershipId, characterId, membershipType)
-getEquipmentInfo()
+// getCharacterInfo(membershipId, characterId, membershipType)
+// getEquipmentInfo()

@@ -29,11 +29,11 @@ class validator {
         return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/.test(this.email) ? true : false
     }
 
-    errorCreator(message, location) {
+    errorCreator(message) {
         let errorLi = document.createElement("li")
         errorLi.setAttribute("class", "error text-danger")
         errorLi.innerHTML = `<br>${message}`
-        errorList.appendChild(errorLi, location)
+        errorList.appendChild(errorLi)
     }
 
     deleteErrors() {
