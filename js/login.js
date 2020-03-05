@@ -23,8 +23,8 @@ loginButton.onclick = () => {
 function welcomeMessage() {
     statusMessage.innerHTML = "Bienvenido de vuelta"
     let welcomeMessage = document.createElement("h5")
-    welcomeMessage.setAttribute("class", "text-center font-weight-bold")
-    welcomeMessage.innerHTML = "Tus personajes están donde los dejaste.<br>¿Te ayudamos a encontrarlos?"
+    welcomeMessage.setAttribute("class", "text-center")
+    welcomeMessage.innerHTML = "<b>Tus personajes están donde los dejaste.</b><br>¿Te ayudamos a encontrarlos?"
     form.innerText = ""
     form.appendChild(welcomeMessage)
 }
