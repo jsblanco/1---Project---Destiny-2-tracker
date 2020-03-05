@@ -1,0 +1,231 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/png" href="images/title-img.png">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Destiny Account Checker</title>
+</head>
+
+<body>
+
+    <header class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-light mt-0 pt-0 d-flex justify-content-between pt-2  pb-1">
+            <div class="col-xl-3 col-lg-3 col-sm-12 text-center">
+                <div class="row py-4">
+                    <button type="button" class="navbar-toggler bg-light m-2" data-toggle="collapse"
+                    data-target="#nav"><span class="fas fa-bars"></span></button>
+                   <a href="index.html"><h1 class="font-weight-bold pt-2 pl-2 text-white">Destiny 2 tracker</h1></a> 
+                </div>
+            </div>
+            <div class="input-field col-xl-3 col-lg-3 col-sm-12 ">
+                <i class="fas fa-search text-light"></i>
+                <input id="search-input" type="text" placeholder="Indica tu usuario de Destiny 2"  onclick=location.href="index.html">
+            </div>
+            <button id="platform-steam" class="btn btn-dark col-lg-1 col-sm-4"  onclick=location.href="index.html"><i class="fab fa-steam mr-2"></i> Steam
+            </button>
+            <button id="platform-playstation" class="btn btn-info col-lg-1 col-sm-4"  onclick=location.href="index.html"><i
+                    class="fab fa-playstation mr-2"></i> PlayStation </button>
+            <button id="platform-xbox" class="btn btn-success col-lg-1 col-sm-4" onclick=location.href="index.html"><i class="fab fa-xbox mr-2"></i> XBox
+            </button>
+            <div class="col-lg-3">
+                <div class="collapse navbar-collapse pl-2" id="nav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a class="nav-link pl3 text-light" href="index.html">Home</a></li>
+                        <li id="nav-login" class="nav-item"><a class="nav-link px3 text-light" href="login.html">Login</a></li>
+                        <li id="nav-register"  class="nav-item"><a class="nav-link px3 text-light  font-weight-bold" href="register.html">Registro</a></li>
+                        <li id="nav-username" class="nav-item d-none"></li>
+                        <li id="nav-logoff"  class="nav-item d-none"><a class="nav-link px3 text-light" href="index.html"><i>¿No eres tú?</i></a></li>
+                        <li class="nav-item"><a class="nav-link px3 text-light" href="faq.html">FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+
+    <div id="status" class="container-fluid"> 
+        <div id="no-favourites" class="row justify-content-center text-center mb-5 d-none">
+            <h4 class="w-100 font-weight-bold">No hay cuenta de usuario guardada</h4>
+            <p>Usa la barra de búsqueda para encontrar tu cuenta de usuario</p>
+        </div>
+    </div>
+
+    <div id="favourite-results" class="mb-4 d-none">
+        <section id="content" class="container-fluid">
+            <div id="status" class="row text-center mb-5">
+                <h4 id="results-header" class="w-100 font-weight-bold">Aquí tienes tu cuenta favorita</h4>
+            </div>
+            <div class="row d-flex justify-content-center">
+                <ul id="favourite-account" class="pl-0 align-items-center">
+                </ul>
+            </div>
+
+            <div id="fav-equipment" class="d-none">
+                <div class="row my-1 justify-content-center">
+                    <div class=" col-xl-6 col-lg-8 col-md-10 m-2 character-header">
+                        <div class="row justify-content-center align-items-center">
+                            <img id="character-emblem" class="my-3 border border-secondary" src="">
+                            <p id="character-data" class="col-lg-5 "></p>
+                            <img id="subclass-icon" src="">
+                            <p id="subclass" class="col-lg-2 font-weight-bold"></p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row my-1 justify-content-center">
+
+                    <div class="col-xl-3 col-lg-4 col-md-6 col-xs-8 px-0 d-flex flex-column align-items-center">
+                        <div class="itemHeader my-4">
+                            <p class="font-weight-bold item-name pt-2 mb-0">Nombre del item</p>
+                            <p class=" font-italic  mb-2 px-2 item-description">Leyenda</p>
+                            <div class="row justify-content-center">
+                                <img class="col-lg-3 col-xs-3 item-icon border" src="">
+                                <div class="col-lg-7 col-xs-9 item-data"></b>
+                                    <p class="my-0 pb-0 light-level-header">Nivel de luz: <br><b
+                                            class="my-0 p-0 font-weight-bold text-warning item-level">750</b></p>
+                                    <p class="mastercrafted-tooltip pt-2 text-warning font-weight-bold"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="itemHeader my-4">
+                            <p class="font-weight-bold item-name pt-2 mb-0">Nombre del item</p>
+                            <p class=" font-italic  mb-2 px-2 item-description">Leyenda</p>
+                            <div class="row justify-content-center">
+                                <img class="col-lg-3 col-xs-3 item-icon border" src="">
+                                <div class="col-lg-7 col-xs-9 item-data"></b>
+                                    <p class="my-0 pb-0 light-level-header">Nivel de luz: <br><b
+                                            class="my-0 p-0 font-weight-bold text-warning item-level">750</b></p>
+                                    <p class="mastercrafted-tooltip pt-2 text-warning font-weight-bold"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="itemHeader my-4">
+                            <p class="font-weight-bold item-name pt-2 mb-0">Nombre del item</p>
+                            <p class=" font-italic  mb-2 px-2 item-description">Leyenda</p>
+                            <div class="row justify-content-center">
+                                <img class="col-lg-3 col-xs-3 item-icon border" src="">
+                                <div class="col-lg-7 col-xs-9 item-data"></b>
+                                    <p class="my-0 pb-0 light-level-header">Nivel de luz: <br><b
+                                            class="my-0 p-0 font-weight-bold text-warning item-level">750</b></p>
+                                    <p class="mastercrafted-tooltip pt-2 text-warning font-weight-bold"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="itemHeader my-4">
+                            <p class="font-weight-bold ghost-name pt-2 mb-0">Nombre del espectro</p>
+                            <p class=" font-italic  mb-2 px-2 ghost-description">Leyenda</p>
+                            <div class="row justify-content-center">
+                                <img class="col-lg-3 col-xs-3 ghost-icon border" src="">
+                                <div class="col-lg-7 col-xs-9 item-data"></b>
+                                    <p class="my-0 pb-0 ghost-data-header"> <br><b
+                                            class="my-0 p-0 font-weight-bold text-warning ghost-level"></b></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="itemHeader my-4">
+                            <p class="font-weight-bold sparrow-name pt-2 mb-0">Nombre del colibrí</p>
+                            <p class=" font-italic  mb-2 px-2 sparrow-description">Leyenda</p>
+                            <div class="row justify-content-center">
+                                <img class="col-lg-3 col-xs-3 sparrow-icon border" src="">
+                                <div class="col-lg-7 col-xs-9 item-data"></b>
+                                    <p class="my-0 pb-0 light-level-header">Velocidad: <br><b
+                                            class="my-0 p-0 font-weight-bold text-warning sparrow-speed">150</b></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-xs-8 d-none d-lg-block px-0">
+                        <img id="guardian-image" class="behind guardian" src="">
+                    </div>
+                    <div class="col-xl-3 col-lg-4 col-md-6 col-xs-8 px-0 d-flex flex-column align-items-center">
+                        <div class="itemHeader my-4">
+                            <p class="font-weight-bold item-name pt-2 mb-0">Nombre del item</p>
+                            <p class=" font-italic  mb-2 px-2 item-description">Leyenda</p>
+                            <div class="row justify-content-center">
+                                <img class="col-lg-3 col-xs-3 item-icon border" src="">
+                                <div class="col-lg-7 col-xs-9 item-data"></b>
+                                    <p class="my-0 pb-0 light-level-header">Nivel de luz: <br><b
+                                            class="my-0 p-0 font-weight-bold text-warning item-level">750</b></p>
+                                    <p class="mastercrafted-tooltip pt-2 text-warning font-weight-bold"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="itemHeader my-4">
+                            <p class="font-weight-bold item-name pt-2 mb-0">Nombre del item</p>
+                            <p class=" font-italic  mb-2 px-2 item-description">Leyenda</p>
+                            <div class="row justify-content-center">
+                                <img class="col-lg-3 col-xs-3 item-icon border" src="">
+                                <div class="col-lg-7 col-xs-9 item-data"></b>
+                                    <p class="my-0 pb-0 light-level-header">Nivel de luz: <br><b
+                                            class="my-0 p-0 font-weight-bold text-warning item-level">750</b></p>
+                                    <p class="mastercrafted-tooltip pt-2 text-warning font-weight-bold"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="itemHeader my-4">
+                            <p class="font-weight-bold item-name pt-2 mb-0">Nombre del item</p>
+                            <p class=" font-italic  mb-2 px-2 item-description">Leyenda</p>
+                            <div class="row justify-content-center">
+                                <img class="col-lg-3 col-xs-3 item-icon border" src="">
+                                <div class="col-lg-7 col-xs-9 item-data"></b>
+                                    <p class="my-0 pb-0 light-level-header">Nivel de luz: <br><b
+                                            class="my-0 p-0 font-weight-bold text-warning item-level">750</b></p>
+                                    <p class="mastercrafted-tooltip pt-2 text-warning font-weight-bold"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="itemHeader my-4">
+                            <p class="font-weight-bold item-name pt-2 mb-0">Nombre del item</p>
+                            <p class=" font-italic  mb-2 px-2 item-description">Leyenda</p>
+                            <div class="row justify-content-center">
+                                <img class="col-lg-3 col-xs-3 item-icon border" src="">
+                                <div class="col-lg-7 col-xs-9 item-data"></b>
+                                    <p class="my-0 pb-0 light-level-header">Nivel de luz: <br><b
+                                            class="my-0 p-0 font-weight-bold text-warning item-level">750</b></p>
+                                    <p class="mastercrafted-tooltip pt-2 text-warning font-weight-bold"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="itemHeader my-4">
+                            <p class="font-weight-bold item-name pt-2 mb-0">Nombre del item</p>
+                            <p class=" font-italic  mb-2 px-2 item-description">Leyenda</p>
+                            <div class="row justify-content-center">
+                                <img class="col-lg-3 col-xs-3 item-icon border" src="">
+                                <div class="col-lg-7 col-xs-9 item-data"></b>
+                                    <p class="my-0 pb-0 light-level-header">Nivel de luz: <br><b
+                                            class="my-0 p-0 font-weight-bold text-warning item-level">750</b></p>
+                                    <p class="mastercrafted-tooltip pt-2 text-warning font-weight-bold"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+</body>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+</script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+</script>
+<script src="./js/istherealoggeduser.js"></script>
+<script src="./js/manifest.js"></script>
+<script src="./js/favourite.js"></script>
+</body>
+
+</html>

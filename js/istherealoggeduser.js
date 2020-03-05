@@ -8,18 +8,25 @@ const searchInput = document.getElementById("search-input")
 function checkLoggedUser(){
     if (localStorage.loggedUser){
     updateNavbar()
-    } 
+    } else {logOff()}
 }
 
 function logOff(){
     localStorage.removeItem("loggedUser")
+    localStorage.removeItem("favMembershipId")
+    localStorage.removeItem("favMembershipType")
+    userNavbar.classList.add("d-none")
+    logoffNavbar.classList.add("d-none")
+    loginNavbar.classList.remove("d-none")
+    registerNavbar.classList.remove("d-none")
 }
 
 function updateNavbar() {
     loginNavbar.classList.add("d-none")
     registerNavbar.classList.add("d-none")
-    userNavbar.innerHTML= `<b>${localStorage.loggedUser}</b>  <i>¿No eres tú?</i>`
+    userNavbar.innerHTML= `<a class="nav-link px3 text-light" href="favourite.html"><b>${localStorage.loggedUser}</b></a>`
     userNavbar.classList.remove("d-none")
+    logoffNavbar.classList.remove("d-none")
 }
 
 function successfullLogin(email){ 
@@ -31,7 +38,7 @@ function successfullLogin(email){
 }
 
 
-userNavbar.onclick = () => logOff()
+logoffNavbar.onclick = () => logOff()
 
 function storeSearchInput(){
     localStorage.setItem("userInput", searchInput.value)

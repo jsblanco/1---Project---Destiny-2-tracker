@@ -232,17 +232,30 @@ a{
     margin:0
 }
 
-.userHeader {
+.userHeader, .favouriteHeader {
     background-color: rgba(0, 0, 0, 0.8);
-    padding: 8px 0;
-    margin: 20px 0 0;
     text-align: center;
     border-radius: 20px 20px 0 0;
-    width: 300px;
+    padding: 8px 0;
+    margin: 20px 0 0;
     font-size: 0.8em;
     color: aliceblue;
     list-style: none;
 }
+
+.fav-account{
+    background-color: rgba(200, 200, 200, 0.8);
+    color: black;
+}
+
+.userHeader {
+    width: 300px;
+}
+
+.favouriteHeader{
+    width: 900px;
+}
+
 
 .modal {
     display: none; 
@@ -281,6 +294,17 @@ body.modal-open {
     margin: -5px auto auto -10px;
     text-decoration: none;
     cursor: pointer;
+}
+
+
+
+
+
+@media only screen and (min-width: 990px) {
+#favourite-account{
+    display: flex;
+    flex-direction: row;
+}
 }
 
 /*

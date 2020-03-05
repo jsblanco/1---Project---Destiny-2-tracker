@@ -139,15 +139,20 @@ function populateResults(json, membershipType) {
     newResult.setAttribute("id", `${json[i].membershipId}`)
     newResult.setAttribute("class", "col-xl-3 col-lg-4 col-md-8 d-none")
     let resultHeader = document.createElement("li")
+    resultHeader.setAttribute("id", `header_${json[i].membershipId}`)
     resultHeader.setAttribute("class", "userHeader")
     resultHeader.innerHTML = `<b>${json[i].displayName}</b>`
     //+` Identificador de Bungie: <b>${json[i].membershipId}</b>`
     resultsList.appendChild(newResult);
     newResult.appendChild(resultHeader);
     getPlayerCharacters(json[i], membershipType)
+    if (localStorage.loggedUser){
+      resultHeader.onclick=()=>setFavourite(json[i].membershipId, membershipType, json[i].displayName)
+        } 
+      }  
   }
   //log// console.log("Termina populateResults()")
-}
+
 
 //Esta función nos consigue el perfil de Destiny de cada jugador en base al membershipId que obtuvimos en membershipByPlatform, via populateResults
 //Nos hace una llamada por cada personaje del usuario a una nueva función, que extrae sus datos
@@ -270,7 +275,15 @@ window.onclick = function (event) {
   }
 }
 
-
+function setFavourite(membershipId, membershipType, displayName){
+  localStorage.setItem("favMembershipId", membershipId)
+  localStorage.setItem("favMembershipType", membershipType)
+  localStorage.setItem("displayName", displayName)
+  let favouriteAccount = document.getElementsByClassName("fav-account")
+  if (favouriteAccount.length>0){favouriteAccount[0].classList.remove("fav-account")}
+  let thisAccount = document.getElementById(`header_${membershipId}`)
+  thisAccount.classList.add("fav-account")
+}
 
 
 
