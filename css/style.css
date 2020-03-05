@@ -230,6 +230,11 @@ a{
     background-color: rgba(0,0,0,0.8);
 }
 
+body.modal-open {
+    height: 100vh;
+    overflow-y: hidden;
+  }
+
 .close {
     color: azure;
     z-index: 1;
