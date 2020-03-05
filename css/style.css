@@ -59,7 +59,12 @@ a{
 }
 
 #guardian-image{
-    margin: 50px auto auto -45px;
+    margin: 120px auto auto -45px;
+    z-index: 3;
+}
+
+.mastercrafted-tooltip{
+    margin-top: -10px;
 }
 
 #login-button:hover {
@@ -165,6 +170,22 @@ a{
     height: 92.5px  !important;
 }
 
+.mastercrafted{
+    box-shadow: 2px 2px 8px 8px rgba(255, 215, 10, 0.15), -2px -2px 8px 8px rgba(255, 215, 10, 0.15);
+}
+
+.mastercrafted:hover{
+    box-shadow: 4px 4px 8px 8px rgba(255, 215, 10, 0.5), -4px -4px 8px 8px rgba(255, 215, 10, 0.5);
+}
+
+.non-mastercrafted, .ghost-icon, .sparrow-icon{
+    box-shadow: 1px 1px 8px 8px rgba(255, 255, 255, 0.05), -1px -1px 8px 8px rgba(255, 255, 255, 0.05);
+}
+
+.non-mastercrafted:hover, .ghost-icon:hover, .sparrow-icon:hover{
+    box-shadow: 4px 4px 8px 8px rgba(255, 255, 255, 0.5), -4px -4px 8px 8px rgba(255, 255, 255, 0.5);
+}
+
 .input-field i {
     width: 20px;
     height: 20px;
@@ -179,6 +200,11 @@ a{
     font-size: 0.8em;
     list-style: none;
     box-shadow: 2px 4px 8px 0 rgba(80, 80, 80, 0.3), 0 6px 20px 0 rgba(50, 50, 50, 0.19);
+    z-index: 1;
+}
+
+.itemHeader:hover, .character-header:hover{
+    background-color: rgba(100, 100, 100, 0.8);
 }
 
 .itemHeader {

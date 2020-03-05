@@ -14,6 +14,7 @@ const characterEmblem = document.getElementById("character-emblem")
 const subclassIcon = document.getElementById("subclass-icon")
 const characterSubclass = document.getElementById("subclass")
 const guardianImage = document.getElementById("guardian-image")
+const mastercrafted = document.getElementsByClassName("mastercrafted-tooltip")
 let guardianClass = "";
 let guardianSubclass = "";
 
@@ -91,9 +92,14 @@ function getItemInfo(item, counter, membershipType, membershipId) {
         .then(function (data) {
             itemLevel[counter].innerHTML = (data.Response.instance.data.primaryStat.value)
             if (data.Response.instance.data.quality === 10) {
-                itemIcon[counter].classList.add("border-warning")
+                itemIcon[counter].classList.remove("border-secondary", "non-mastercrafted")
+                itemIcon[counter].classList.add("border-warning", "text-warning", "mastercrafted")
+                mastercrafted[counter].innerText =`Obra maestra`;
+                console.log("Mastercrafted")
             } else {
-                itemIcon[counter].classList.add("border-secondary")
+                itemIcon[counter].classList.remove("border-warning", "text-warning", "mastercrafted")
+                itemIcon[counter].classList.add("border-secondary", "non-mastercrafted")
+                mastercrafted[counter].innerText ="";
             }
         })
 }
