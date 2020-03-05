@@ -133,8 +133,6 @@ function getCharacterInformation(membershipId, characterId, membershipType) {
 
 function populateCharacterInformation(characterId, membershipType) {
     //log//  console.log(`Añadiendo personajes para ${characterId.membershipId}`)
-
-
     let characterP = document.getElementById("character-data")
     let spentTime = characterId.minutesPlayedTotal
     let race = "";
@@ -161,12 +159,12 @@ function populateCharacterInformation(characterId, membershipType) {
             race = "exo";
             break;
     }
-    //log// console.log("Termina nueva población")
     //  characterLi.setAttribute("class", "col-lg-8, characterHeader")
     characterEmblem.src = `https://www.bungie.net${characterId.emblemPath}`
     characterP.innerHTML = `<b>${guardianClass}</b> ${race} ${sex}. <b>${characterId.light} luz</b><br>     
-        <i>${Math.floor(spentTime/60)} horas y ${spentTime%60} minutos jugados.</i>`;
+    <i>${Math.floor(spentTime/60)} horas y ${spentTime%60} minutos jugados.</i>`;
     characterP.classList.add("m-3", "text-light")
+//log// console.log("Termina nueva población")
 }
 
 
