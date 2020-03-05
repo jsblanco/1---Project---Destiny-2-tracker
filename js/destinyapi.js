@@ -232,6 +232,7 @@ function populateCharacterInfo(characterId, membershipType) {
     charactersFound()
     characterLi.appendChild(characterP)
     linkToInventory(characterLi, membershipType, characterId.membershipId, characterId.characterId)
+    userUl.classList.add("d-flex", "flex-column", "align-items-center")
     userUl.classList.remove("d-none")
     userUl.appendChild(characterLi)
 //log//    console.log("Termina nueva población")
