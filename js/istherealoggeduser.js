@@ -18,7 +18,7 @@ function logOff(){
 function updateNavbar() {
     loginNavbar.classList.add("d-none")
     registerNavbar.classList.add("d-none")
-    userNavbar.innerHTML= `<b>${localStorage.loggedUser}</b>    <i>¿No eres tú?</i>`
+    userNavbar.innerHTML= `<b>${localStorage.loggedUser}</b>   <br> <i>¿No eres tú?</i>`
     userNavbar.classList.remove("d-none")
 }
 
