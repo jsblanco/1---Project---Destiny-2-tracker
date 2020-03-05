@@ -1,6 +1,4 @@
-html{
-    max-width: 100%;
-}
+
 body {
     font-family: Gill Sans / Gill Sans MT, sans-serif;
     background-image: url(../img/wallpaper2.jpg);
@@ -10,7 +8,10 @@ body {
 }
 
 
+header {
 
+    background-color: rgba(50,50,50,.9);
+}
 
 ::placeholder { 
     color: lightgray;
@@ -200,7 +201,7 @@ a{
 }
 
 .navbar{
-    background-color: rgba(50,50,50,.9);
+
     margin:0
 }
 
