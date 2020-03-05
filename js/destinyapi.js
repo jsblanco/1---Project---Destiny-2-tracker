@@ -26,7 +26,7 @@ const modal = document.getElementById("myModal");
 const span = document.getElementsByClassName("close")[0];
 let membershipType
 let membershipId
-let characterId 
+let characterId
 
 //Revisa si hay un usuario dado de alta
 
@@ -94,7 +94,7 @@ function charactersFound() {
 //El parámetro membershipType lo iremos pasando desde el inicio hasta la última función, que es donde se usará finalmente.
 
 function displayNameQuery(membershipType) {
-//log//  console.log("Empieza displayNameQuery")
+  //log//  console.log("Empieza displayNameQuery")
   let user = localStorage.userInput
   queryStatus.innerHTML = ""
   addLoadingMessage()
@@ -113,9 +113,9 @@ function displayNameQuery(membershipType) {
 //Tenemos que meter steamPlayers.membershipId
 
 function membershipByPlatform(steamPlayers, membershipType) {
-//log// console.log("Empieza membershipByPlatform()")
+  //log// console.log("Empieza membershipByPlatform()")
   let searchQuery = searchInput.value
-//log//  console.log(searchQuery)
+  //log//  console.log(searchQuery)
   localStorage.removeItem("userInput")
   steamPlayers.map(function (user) {
     fetch(`https://www.bungie.net/Platform/User/GetMembershipsById/${user.membershipId}/${membershipType}/`, {
@@ -128,12 +128,12 @@ function membershipByPlatform(steamPlayers, membershipType) {
       .then(json => json.filter((memberships) => memberships.displayName.toLowerCase().includes(searchQuery.toLowerCase())))
       .then(json => populateResults(json, membershipType))
   })
-//log// console.log("Termina membershipByPlatform()")
+  //log// console.log("Termina membershipByPlatform()")
 }
 
 //Nos muestra la pantalla de inicio. Ahora mismo bebe de Membership Id
 function populateResults(json, membershipType) {
-//log//   console.log("Empieza populateResults")
+  //log//   console.log("Empieza populateResults")
   for (let i = 0; i < json.length; i++) {
     let newResult = document.createElement("ul")
     newResult.setAttribute("id", `${json[i].membershipId}`)
@@ -146,23 +146,27 @@ function populateResults(json, membershipType) {
     newResult.appendChild(resultHeader);
     getPlayerCharacters(json[i], membershipType)
   }
-//log// console.log("Termina populateResults()")
+  //log// console.log("Termina populateResults()")
 }
 
 //Esta función nos consigue el perfil de Destiny de cada jugador en base al membershipId que obtuvimos en membershipByPlatform, via populateResults
 //Nos hace una llamada por cada personaje del usuario a una nueva función, que extrae sus datos
 
 function getPlayerCharacters(membershipId, membershipType) {
-//log//  console.log("Empieza getPlayerCharacters")
-  fetch(`https://www.bungie.net/Platform/Destiny2/${membershipId.membershipType}//Profile/${membershipId.membershipId}/?components=200`, {
+  //log//  console.log("Empieza getPlayerCharacters")
+  fetch(`https://www.bungie.net/Platform/Destiny2/${membershipType}//Profile/${membershipId.membershipId}/?components=200`, {
       headers: {
         "X-API-Key": apiKey
       }
     })
     .then(response => response.json())
     .then((data) => {
-      let roster = data.Response.characters.data;
-      return roster;
+      if (data.Response === undefined) {
+        return console.log("No character found for ", membershipId.membershipId,", resuming")
+      } else {
+        let roster = data.Response.characters.data;
+        return roster;
+      }
     })
     .then((roster) => {
 
@@ -170,14 +174,14 @@ function getPlayerCharacters(membershipId, membershipType) {
         getCharacterInfo(membershipId, characterId, membershipType)
       }
     })
-//log// console.log("Termina getPlayerCharacters()")
+  //log// console.log("Termina getPlayerCharacters()")
 }
 //log// console.log("Termina getPlayerCharacters")
 
 //Esta función recibe el ID de cada personaje de la función anterior, y extrae todos los datos
 
 function getCharacterInfo(membershipId, characterId, membershipType) {
-//log// console.log("Empieza getCharacterInfo()")
+  //log// console.log("Empieza getCharacterInfo()")
   fetch(`https://www.bungie.net/Platform/Destiny2/${membershipId.membershipType}/Profile/${membershipId.membershipId}/Character/${characterId}/?components=200`, {
       headers: {
         "X-API-Key": apiKey
@@ -185,14 +189,14 @@ function getCharacterInfo(membershipId, characterId, membershipType) {
     })
     .then(response => response.json())
     .then(data => populateCharacterInfo(data.Response.character.data, membershipType))
-//log// console.log("Termina getCharacterInfo()")
-  }
+  //log// console.log("Termina getCharacterInfo()")
+}
 
 //Recibe un array con la información de cada personaje de la función getCharacterInfo y la estructura y publica en el HTML
 //Coloca cada personaje bajo su cuenta de usuario usando el nº de usuario, que en populateResults añadimos como Id de cada Ul
 
 function populateCharacterInfo(characterId, membershipType) {
-//log//   console.log(`Añadiendo personajes para ${characterId.membershipId}`)
+  //log//   console.log(`Añadiendo personajes para ${characterId.membershipId}`)
   if (characterId.membershipType === membershipType) {
     let userUl = document.getElementById(characterId.membershipId)
     let characterP = document.createElement("p")
@@ -235,30 +239,32 @@ function populateCharacterInfo(characterId, membershipType) {
     userUl.classList.add("d-flex", "flex-column", "align-items-center")
     userUl.classList.remove("d-none")
     userUl.appendChild(characterLi)
-//log//    console.log("Termina nueva población")
+    //log//    console.log("Termina nueva población")
   }
 }
 
-function linkToInventory(characterLi, membershipType, membershipId, characterId){
+function linkToInventory(characterLi, membershipType, membershipId, characterId) {
 
-  characterLi.onclick =()=>{
+  characterLi.onclick = () => {
     membershipType = membershipType
     membershipId = membershipId
     characterId = characterId
     getCharacterInformation(membershipId, characterId, membershipType)
     getEquipmentInfo(membershipType, membershipId, characterId)
-    window.scrollTo({ top: 0})
+    window.scrollTo({
+      top: 0
+    })
     modal.style.display = "block";
   }
 }
 
 
-span.onclick = function() {
+span.onclick = function () {
   modal.style.display = "none";
 }
 
 
-window.onclick = function(event) {
+window.onclick = function (event) {
   if (event.target == modal) {
     modal.style.display = "none";
   }
