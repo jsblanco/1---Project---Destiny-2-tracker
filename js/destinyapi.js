@@ -86,6 +86,12 @@ function charactersFound() {
   let loadingMessage = document.querySelector('#loadingResults');
   noResults.innerHTML = ""
   loadingMessage.innerHTML = "Selecciona tu personaje";
+  if (localStorage.loggedUser){
+    let selectAFavAccount = document.createElement("p")
+    selectAFavAccount.setAttribute("id", "select-your-account")
+    selectAFavAccount.innerText="Pulsa sobre el nombre de tu cuenta para añadirla a tu perfil de usuario"
+    loadingMessage.appendChild(selectAFavAccount)
+  }
 }
 
 //COMIENZA LO DIVERTIDO

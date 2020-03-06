@@ -1,19 +1,3 @@
-/*
-//INFO DE LA API:
-//https://bungie-net.github.io/multi/operation_get_User-SearchUsers.html#operation_get_User-SearchUsers
-//COMPONENTS PARA LA API:
-//https://bungie-net.github.io/multi/schema_Destiny-DestinyComponentType.html
-//Components se añaden después de la URL fetch, dentro de los backticks, ya en número o en texto, y separados por comas: /?components=200 
-//MANIFEST DE DESTINY: por si llego al backlog de la página de inventario y quiero incluir los nombres de las armas
-// https://www.bungie.net/platform/Destiny2/Manifest/
-//Destiny item manifest lite:
-//'/common/destiny2_content/json/es/DestinyInventoryItemLiteDefinition-2fbe1829-dfcd-44ec-84d3-bb04a3777dc1.json',
-
-var membershipId = "4611686018467782694"
-var characterId = "2305843009299217882"
-Steam membershipType: 3
-*/
-
 var apiKey = "dd6e865e28924fad9ea265dfae890e35";
 
 
@@ -62,7 +46,7 @@ if (localStorage.favMembershipId){
 //Nos hace una llamada por cada personaje del usuario a una nueva función, que extrae sus datos
 
 function getPlayerCharacters(membershipId, membershipType) {
-    console.log("Empieza getPlayerCharacters")
+   //log// console.log("Empieza getPlayerCharacters")
   favouriteAccount.classList.add(`${membershipId}`)
   fetch(`https://www.bungie.net/Platform/Destiny2/${membershipType}//Profile/${membershipId}/?components=200`, {
       headers: {
@@ -83,14 +67,14 @@ function getPlayerCharacters(membershipId, membershipType) {
         getCharacterInfo(membershipId, characterId, membershipType)
       }
     })
-   console.log("Termina getPlayerCharacters()")
+  //log// console.log("Termina getPlayerCharacters()")
 }
- console.log("Termina getPlayerCharacters")
+//log// console.log("Termina getPlayerCharacters")
 
 //Esta función recibe el ID de cada personaje de la función anterior, y extrae todos los datos
 
 function getCharacterInfo(membershipId, characterId, membershipType) {
-   console.log("Empieza getCharacterInfo()")
+  //log// console.log("Empieza getCharacterInfo()")
   fetch(`https://www.bungie.net/Platform/Destiny2/${membershipType}/Profile/${membershipId}/Character/${characterId}/?components=200`, {
       headers: {
         "X-API-Key": apiKey
@@ -98,14 +82,14 @@ function getCharacterInfo(membershipId, characterId, membershipType) {
     })
     .then(response => response.json())
     .then(data => populateCharacterInfo(data.Response.character.data, membershipType))
-   console.log("Termina getCharacterInfo()")
+  //log// console.log("Termina getCharacterInfo()")
 }
 
 //Recibe un array con la información de cada personaje de la función getCharacterInfo y la estructura y publica en el HTML
 //Coloca cada personaje bajo su cuenta de usuario usando el nº de usuario, que en populateResults añadimos como Id de cada Ul
 
 function populateCharacterInfo(characterId, membershipType) {
-   console.log(`Añadiendo personajes para ${characterId.membershipId}`)
+  //log// console.log(`Añadiendo personajes para ${characterId.membershipId}`)
     let characterP = document.createElement("p")
     let characterLi = document.createElement("li")
     let characterEmblem = `url(https://www.bungie.net/${characterId.emblemBackgroundPath})`
@@ -145,7 +129,7 @@ function populateCharacterInfo(characterId, membershipType) {
     resultsHeader.innerHTML= `Cuenta favorita: <b>${displayName}</b>`
     favouriteResults.classList.remove("d-none")
     favouriteAccount.appendChild(characterLi)
-        console.log("Termina nueva población")
+//log// console.log("Termina nueva población")
   
 }
 
@@ -163,7 +147,7 @@ function linkToInventory(characterLi, membershipType, membershipId, characterId)
 
 function getEquipmentInfo(membershipType, membershipId, characterId) {
 
-    console.log("Comienza getEquipmentInfo")
+//log// console.log("Comienza getEquipmentInfo")
     let counter = 0
     fetch(`https://www.bungie.net/Platform/Destiny2/${membershipType}/Profile/${membershipId}/Character/${characterId}/?components=205`, {
             headers: {
@@ -187,13 +171,13 @@ function getEquipmentInfo(membershipType, membershipId, characterId) {
                 } else if (counter ===10){
                     counter++;
                 } else if (counter === 11) {
-                    console.log(item)
+                   //log// console.log(item)
                     populateGuardianSubclass(item)
                     counter++;
                 }
             })
         })
-        .then(() => console.log("Termina getEquipmentInfo"))
+//log//  .then(() => console.log("Termina getEquipmentInfo"))
 }
 
 function populateItemName(item, counter) {
@@ -215,7 +199,7 @@ function getItemInfo(item, counter, membershipType, membershipId) {
                 itemIcon[counter].classList.remove("border-secondary", "non-mastercrafted")
                 itemIcon[counter].classList.add("border-warning", "text-warning", "mastercrafted")
                 mastercrafted[counter].innerText =`Obra maestra`;
-                console.log("Mastercrafted")
+//log// console.log("Mastercrafted")
             } else {
                 itemIcon[counter].classList.remove("border-warning", "text-warning", "mastercrafted")
                 itemIcon[counter].classList.add("border-secondary", "non-mastercrafted")
@@ -258,7 +242,7 @@ function getCharacterInformation(membershipId, characterId, membershipType) {
 
 
 function populateCharacterInformation(characterId, membershipType) {
-      console.log(`Añadiendo personajes para ${characterId.membershipId}`)
+//log// console.log(`Añadiendo personajes para ${characterId.membershipId}`)
     let characterP = document.getElementById("character-data")
     let spentTime = characterId.minutesPlayedTotal
     let race = "";
@@ -291,7 +275,7 @@ function populateCharacterInformation(characterId, membershipType) {
     <i>${Math.floor(spentTime/60)} horas y ${spentTime%60} minutos jugados.</i>`;
     characterP.classList.add("m-3", "text-light")
     favouriteEquipment.classList.remove("d-none")
- console.log("Termina nueva población")
+//log// console.log("Termina nueva población")
 }
 
 
@@ -300,10 +284,7 @@ function populateCharacterInformation(characterId, membershipType) {
 function populateGuardianSubclass(item){
     subclassIcon.src = `http://www.bungie.net/${manifest[item.itemHash.toString()].displayProperties.icon}`
     characterSubclass.innerHTML = manifest[item.itemHash.toString()].displayProperties.name
-    console.log(manifest[item.itemHash.toString()].talentGrid.buildName)
+//log// console.log(manifest[item.itemHash.toString()].talentGrid.buildName)
     guardianImage.src=`./img/${manifest[item.itemHash.toString()].talentGrid.buildName}.png`
 }
 
-
-// getCharacterInfo(membershipId, characterId, membershipType)
-// getEquipmentInfo()
